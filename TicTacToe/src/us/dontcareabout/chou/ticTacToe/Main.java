@@ -14,10 +14,21 @@ public class Main {
 		
 		// init empty board
 		char [][] playBoard = {{'-', '-','-'},{'-', '-','-'},{'-', '-','-'}};
+		int player =1;
 		
 		printBoard(playBoard);
 		
-		playBoard = placeStone(0,0, 2, playBoard);
+		
+		
+		playBoard = placeStone(0,0, player, playBoard);
+		printBoard(playBoard);
+		
+		player = switchPlayer(player);
+		playBoard = placeStone(1,0, player, playBoard);
+		printBoard(playBoard);
+		
+		player = switchPlayer(player);
+		playBoard = placeStone(1,1, player, playBoard);
 		printBoard(playBoard);
 
 	}
@@ -31,7 +42,15 @@ public class Main {
 		}
 		System.out.println();
 	}
-	
+
+	// switch play 1 and 2
+	private static int switchPlayer(int player) {
+		switch(player) {
+		case(1): {player = 2; break;}
+		case(2): {player =1; break;}
+		}
+		return player;
+	}
 
 	// place stone at position x, y. Player 1's mark ='O', Player 2's mark='X'
 	private static char [][] placeStone(int x, int y, int player, char [][] playBoard) {
