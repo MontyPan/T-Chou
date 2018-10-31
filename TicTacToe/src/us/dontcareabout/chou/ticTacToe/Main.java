@@ -20,15 +20,17 @@ public class Main {
 		
 		
 		
-		playBoard = placeStone(0,0, player, playBoard);
+		if(placeStone(0,0, player, playBoard)) {
+			
+		}
 		printBoard(playBoard);
 		
 		player = switchPlayer(player);
-		playBoard = placeStone(1,0, player, playBoard);
+		placeStone(1,0, player, playBoard);
 		printBoard(playBoard);
 		
 		player = switchPlayer(player);
-		playBoard = placeStone(1,1, player, playBoard);
+		placeStone(1,0, player, playBoard);
 		printBoard(playBoard);
 
 	}
@@ -53,14 +55,23 @@ public class Main {
 	}
 
 	// place stone at position x, y. Player 1's mark ='O', Player 2's mark='X'
-	private static char [][] placeStone(int x, int y, int player, char [][] playBoard) {
+	// return true if the position x, y is empty where the stone can be placed.
+	private static boolean placeStone(int x, int y, int player, char [][] playBoard) {
 		char mark='-';
 		switch(player) {
 		case(1): {mark='O';break;}
 		case(2): {mark='X';break;}
 		}
-		playBoard[x][y] = mark;
-		return playBoard;
+		
+		if(playBoard[x][y] =='-') {
+			playBoard[x][y] = mark;
+			return true;
+		}
+		else {
+			System.out.println("The position " + x + ", " + y + " is not available");
+			return false;
+		}
+		
 	}
 
 	private static int getInputNumber() {
