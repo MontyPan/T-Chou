@@ -18,20 +18,27 @@ public class Main {
 		
 		printBoard(playBoard);
 		
-		
-		
-		if(placeStone(0,0, player, playBoard)) {
-			
+		while(true) {
+			System.out.println("Player " + player +" input");
+			int value = getInputNumber();
+			int [] pos = getPosition(value);
+			System.out.println(pos[0] + "," + pos[1]);
 		}
-		printBoard(playBoard);
 		
-		player = switchPlayer(player);
-		placeStone(1,0, player, playBoard);
-		printBoard(playBoard);
 		
-		player = switchPlayer(player);
-		placeStone(1,0, player, playBoard);
-		printBoard(playBoard);
+		
+//		if(placeStone(0,0, player, playBoard)) {
+//			
+//		}
+//		printBoard(playBoard);
+//		
+//		player = switchPlayer(player);
+//		placeStone(1,0, player, playBoard);
+//		printBoard(playBoard);
+//		
+//		player = switchPlayer(player);
+//		placeStone(1,0, player, playBoard);
+//		printBoard(playBoard);
 
 	}
 	
@@ -71,12 +78,24 @@ public class Main {
 			System.out.println("The position " + x + ", " + y + " is not available");
 			return false;
 		}
-//<<<<<<< HEAD
-//		
-//=======
-//
-//		getInputNumber();
-//>>>>>>> master
+	}
+	
+	// get position x, y from numpad.
+	private static int [] getPosition(int number) {
+		int x=10, y=10;
+		switch(number) {
+			case(1): {x=2; y=0; break;}
+			case(2): {x=2; y=1; break;}
+			case(3): {x=2; y=2; break;}
+			case(4): {x=1; y=0; break;}
+			case(5): {x=1; y=1; break;}
+			case(6): {x=1; y=2; break;}
+			case(7): {x=0; y=0; break;}
+			case(8): {x=0; y=1; break;}
+			case(9): {x=0; y=2; break;}
+		}
+		int [] pos= {x, y};
+		return pos;
 	}
 
 	@SuppressWarnings("resource")
