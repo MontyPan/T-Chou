@@ -22,23 +22,15 @@ public class Main {
 			System.out.println("Player " + player +" input");
 			int value = getInputNumber();
 			int [] pos = getPosition(value);
-			System.out.println(pos[0] + "," + pos[1]);
+			System.out.println();
+//			System.out.println(pos[0] + "," + pos[1]);
+			if(placeStone(pos[0],pos[1], player, playBoard)) {
+				player=switchPlayer(player);
+				printBoard(playBoard);
+				
+			}
 		}
 		
-		
-		
-//		if(placeStone(0,0, player, playBoard)) {
-//			
-//		}
-//		printBoard(playBoard);
-//		
-//		player = switchPlayer(player);
-//		placeStone(1,0, player, playBoard);
-//		printBoard(playBoard);
-//		
-//		player = switchPlayer(player);
-//		placeStone(1,0, player, playBoard);
-//		printBoard(playBoard);
 
 	}
 	
@@ -49,7 +41,7 @@ public class Main {
 		for(int line=0; line<len; line++) {
 			System.out.println(playBoard[line]);
 		}
-		System.out.println();
+//		System.out.println();
 	}
 
 	// switch play 1 and 2
