@@ -71,14 +71,18 @@ public class Main {
 			System.out.println("The position " + x + ", " + y + " is not available");
 			return false;
 		}
-		
+//<<<<<<< HEAD
+//		
+//=======
+//
+//		getInputNumber();
+//>>>>>>> master
 	}
 
+	@SuppressWarnings("resource")
 	private static int getInputNumber() {
 		Scanner scanner = new Scanner(System.in);
-		int result = scanner.nextInt();
-		scanner.close();
-		return result;
+		return scanner.nextInt();
 	}
 	
 
