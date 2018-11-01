@@ -10,13 +10,14 @@ public class Main {
 			if (i % 2 != 0) { continue; }
 			callMethod(i);
 		}
+
+		getInputNumber();
 	}
 
+	@SuppressWarnings("resource")
 	private static int getInputNumber() {
 		Scanner scanner = new Scanner(System.in);
-		int result = scanner.nextInt();
-		scanner.close();
-		return result;
+		return scanner.nextInt();
 	}
 
 	private static void callMethod(int value) {
