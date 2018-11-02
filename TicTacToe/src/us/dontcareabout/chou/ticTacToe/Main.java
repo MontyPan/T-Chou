@@ -9,19 +9,14 @@ public class Main {
 
 		printBoard(playBoard);
 
-        placeStone(0,0, player, playBoard);
-        printBoard(playBoard);
-        player=switchPlayer(player);
-
-        placeStone(0,1, player, playBoard);
-        printBoard(playBoard);
-
-        placeStone(1,0, player, playBoard);
-        printBoard(playBoard);
-
         while(true) {
+            System.out.println("Player "+ player +" input:");
             int [] pos = getPosition();
-            System.out.println(pos[0]+ ", "+pos[1]);
+            if(placeStone(pos[0],pos[1], player, playBoard)) {
+                player = switchPlayer(player);
+                System.out.println();
+                printBoard(playBoard);
+            }
         }
 	}
 
@@ -46,6 +41,7 @@ public class Main {
 	// print TicTacToe board
 	private static void printBoard( char [][] playBoard) {
 	    int len = playBoard.length;
+	    System.out.println("TicTacToe:");
 	    for(int idx=0; idx<len; idx++) {
 	        System.out.println(playBoard[idx]);
         }
@@ -75,7 +71,7 @@ public class Main {
             playBoard[i][j] = marker;
             return true;
         } else {
-            System.out.println("The position i, j is not available.");
+            System.out.println("The position "+ i+", "+j +" is not available.");
             return false;
         }
     }
