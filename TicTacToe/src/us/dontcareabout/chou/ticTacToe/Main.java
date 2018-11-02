@@ -18,7 +18,30 @@ public class Main {
 
         placeStone(1,0, player, playBoard);
         printBoard(playBoard);
+
+        while(true) {
+            int [] pos = getPosition();
+            System.out.println(pos[0]+ ", "+pos[1]);
+        }
 	}
+
+	// Get position i, j from numpad
+	private static int [] getPosition() {
+	    int num = getInputNumber();
+	    int [] pos = {10,10};
+	    switch(num) {
+            case(1): {pos[0]=2; pos[1]=0; break;}
+            case(2): {pos[0]=2; pos[1]=1; break;}
+            case(3): {pos[0]=2; pos[1]=2; break;}
+            case(4): {pos[0]=1; pos[1]=0; break;}
+            case(5): {pos[0]=1; pos[1]=1; break;}
+            case(6): {pos[0]=1; pos[1]=2; break;}
+            case(7): {pos[0]=0; pos[1]=0; break;}
+            case(8): {pos[0]=0; pos[1]=1; break;}
+            case(9): {pos[0]=0; pos[1]=2; break;}
+        }
+        return pos;
+    }
 
 	// print TicTacToe board
 	private static void printBoard( char [][] playBoard) {
