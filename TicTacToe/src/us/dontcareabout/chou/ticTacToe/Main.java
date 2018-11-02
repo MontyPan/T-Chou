@@ -4,15 +4,18 @@ import java.util.Scanner;
 
 public class Main {
 	public static void main(String[] args) {
-		int value = getInputNumber();
+		char [][] playBoard = {{'-','-','-'},{'-','-','-'},{'-','-','-'}};
 
-		for (int i = 0; i < value; i++) {
-			if (i % 2 != 0) { continue; }
-			callMethod(i);
-		}
-
-		getInputNumber();
+		printBoard(playBoard);
 	}
+
+	// print TicTacToe board
+	public static void printBoard( char [][] playBoard) {
+	    int len = playBoard.length;
+	    for(int idx=0; idx<len; idx++) {
+	        System.out.println(playBoard[idx]);
+        }
+    }
 
 	@SuppressWarnings("resource")
 	private static int getInputNumber() {
