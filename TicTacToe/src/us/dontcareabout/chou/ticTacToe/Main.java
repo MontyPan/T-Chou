@@ -24,56 +24,9 @@ public class Main {
 	// Get position i, j from numpad
 	private static int[] getPosition() {
 		int num = getInputNumber();
-		int[] pos = {10, 10};
 
-		switch (num) {
-			case (1): {
-				pos[0] = 2;
-				pos[1] = 0;
-				break;
-			}
-			case (2): {
-				pos[0] = 2;
-				pos[1] = 1;
-				break;
-			}
-			case (3): {
-				pos[0] = 2;
-				pos[1] = 2;
-				break;
-			}
-			case (4): {
-				pos[0] = 1;
-				pos[1] = 0;
-				break;
-			}
-			case (5): {
-				pos[0] = 1;
-				pos[1] = 1;
-				break;
-			}
-			case (6): {
-				pos[0] = 1;
-				pos[1] = 2;
-				break;
-			}
-			case (7): {
-				pos[0] = 0;
-				pos[1] = 0;
-				break;
-			}
-			case (8): {
-				pos[0] = 0;
-				pos[1] = 1;
-				break;
-			}
-			case (9): {
-				pos[0] = 0;
-				pos[1] = 2;
-				break;
-			}
-		}
-		return pos;
+		int[][] pos = {{2, 0}, {2, 1}, {2, 2}, {1, 0}, {1, 1}, {1, 2}, {0, 0}, {0, 1}, {0, 2}};
+		return pos[num - 1];
 	}
 
 	// print TicTacToe board
