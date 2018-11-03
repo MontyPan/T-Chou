@@ -5,16 +5,21 @@ import java.util.Scanner;
 public class Main {
 	public static void main(String[] args) {
 		char[][] playBoard = {{'-', '-', '-'}, {'-', '-', '-'}, {'-', '-', '-'}};
-		int player = 1;
+		boolean player1 = true;
 
 		printBoard(playBoard);
 
 		while (true) {
-			System.out.println("Player " + player + " input:");
+			if(player1) {
+				System.out.println("Player 1 input:");
+			} else {
+				System.out.println("Player 2 input:");
+			}
+
 			int[] pos = getPosition();
 
-			if (placeStone(pos[0], pos[1], player, playBoard)) {
-				player = switchPlayer(player);
+			if (placeStone(pos[0], pos[1], player1, playBoard)) {
+				player1 = switchPlayer(player1);
 				System.out.println();
 				printBoard(playBoard);
 			}
@@ -40,21 +45,20 @@ public class Main {
 	}
 
 	// Switch players between 1 and 2
-	private static int switchPlayer(int player) {
-		if (player == 1) {
-			player = 2;
-		} else if (player == 2) {
-			player = 1;
+	private static boolean switchPlayer(boolean player) {
+		if (player) {
+			return false;
+		} else {
+			return true;
 		}
-		return player;
 	}
 
 	// place stones on position i, j.
 	// Return true if the position i, j is empty where stones can be placed.
-	private static boolean placeStone(int i, int j, int player, char[][] playBoard) {
+	private static boolean placeStone(int i, int j, boolean player, char[][] playBoard) {
 		char marker = '-';
 
-		if (player == 1) {
+		if (player) {
 			marker = 'O';
 		} else {
 			marker = 'X';
