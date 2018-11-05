@@ -19,7 +19,7 @@ public class Main {
 			int[] pos = getPosition();
 
 			if (placeStone(pos[0], pos[1], player1, playBoard)) {
-				player1 = switchPlayer(player1);
+				player1 = !player1;		// switch player
 				System.out.println();
 				printBoard(playBoard);
 			}
@@ -44,14 +44,6 @@ public class Main {
 		}
 	}
 
-	// Switch players between 1 and 2
-	private static boolean switchPlayer(boolean player) {
-		if (player) {
-			return false;
-		} else {
-			return true;
-		}
-	}
 
 	// place stones on position i, j.
 	// Return true if the position i, j is empty where stones can be placed.
