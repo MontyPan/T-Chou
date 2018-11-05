@@ -10,7 +10,7 @@ public class Main {
 		printBoard(playBoard);
 
 		while (true) {
-			if(player1) {
+			if (player1) {
 				System.out.println("Player 1 input:");
 			} else {
 				System.out.println("Player 2 input:");
@@ -19,7 +19,7 @@ public class Main {
 			int[] pos = getPosition();
 
 			if (placeStone(pos[0], pos[1], player1, playBoard)) {
-				player1 = !player1;		// switch player
+				player1 = !player1;        // switch player
 				System.out.println();
 				printBoard(playBoard);
 			}
@@ -44,9 +44,13 @@ public class Main {
 		}
 	}
 
-
-	// place stones on position i, j.
-	// Return true if the position i, j is empty where stones can be placed.
+	/**
+	 * place stones on position i, j.
+	 *
+	 * @param i number of row
+	 * @param j number of column
+	 * @return true if the position i, j is empty where stones can be placed.
+	 */
 	private static boolean placeStone(int i, int j, boolean player, char[][] playBoard) {
 		char marker = '-';
 
