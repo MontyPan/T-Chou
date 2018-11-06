@@ -6,24 +6,69 @@ public class Main {
 	public static void main(String[] args) {
 		char[][] playBoard = {{'-', '-', '-'}, {'-', '-', '-'}, {'-', '-', '-'}};
 		boolean player1 = true;
+		String playerName = "";
 
 		printBoard(playBoard);
 
 		while (true) {
 			if (player1) {
-				System.out.println("Player 1 input:");
+				playerName = "Player 1";
 			} else {
-				System.out.println("Player 2 input:");
+				playerName = "Player 2";
 			}
 
+			System.out.println(playerName + " input:");
 			int[] pos = getPosition();
 
 			if (placeStone(pos[0], pos[1], player1, playBoard)) {
-				player1 = !player1;        // switch player
+
 				System.out.println();
 				printBoard(playBoard);
+				if (checkWin(pos[0], pos[1], playBoard)) {
+					System.out.println(playerName + " wins!");
+					break;
+				}
+				player1 = !player1;        // switch player
 			}
 		}
+	}
+
+	/**
+	 * @param i the last input of row
+	 * @param j the last input of column
+	 * @return true if the last input makes the player win.
+	 */
+	private static boolean checkWin(int i, int j, char[][] playBoard) {
+		char marker = playBoard[i][j];
+		boolean checkRow = true, checkColumn = true;
+
+		for (int idx = 0; idx < 3; idx++) {
+			if (playBoard[i][idx] != marker) {
+				checkRow = false;
+				break;
+			}
+		}
+		for (int idx = 0; idx < 3; idx++) {
+			if (playBoard[idx][j] != marker) {
+				checkColumn = false;
+				break;
+			}
+		}
+
+		if (checkRow || checkColumn) {
+			return true;
+		}
+
+		if (playBoard[1][1] == marker && ((i + j) % 2 == 0)) {
+			if (playBoard[0][0] == marker && playBoard[2][2] == marker) {
+				return true;
+			}
+			if (playBoard[0][2] == marker && playBoard[2][0] == marker) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	// Get position i, j from numpad
