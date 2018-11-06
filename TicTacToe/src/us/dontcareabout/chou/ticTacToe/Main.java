@@ -9,8 +9,9 @@ public class Main {
 		String playerName = "";
 
 		printBoard(playBoard);
+		int turns = 0;
 
-		while (true) {
+		while (turns < 9) {
 			if (player1) {
 				playerName = "Player 1";
 			} else {
@@ -29,8 +30,16 @@ public class Main {
 					break;
 				}
 				player1 = !player1;        // switch player
+				turns += 1;
 			}
+
+
 		}
+
+		if (turns == 9) {
+			System.out.println("Tie!");
+		}
+
 	}
 
 	/**
