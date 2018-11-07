@@ -3,8 +3,18 @@ package us.dontcareabout.chou.ticTacToe;
 import java.util.Scanner;
 
 public class Main {
+	public static final int N = 3;
+
 	public static void main(String[] args) {
-		char[][] playBoard = {{'-', '-', '-'}, {'-', '-', '-'}, {'-', '-', '-'}};
+		char[][] playBoard;
+		playBoard = new char[N][N];
+
+		for (int i=0; i<N; i++) {
+			for (int j=0;j<N;j++) {
+				playBoard[i][j] ='-';
+			}
+		}
+
 		boolean player1 = true;
 		String playerName = "";
 
