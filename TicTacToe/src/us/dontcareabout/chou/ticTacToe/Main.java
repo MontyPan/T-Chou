@@ -101,12 +101,17 @@ public class Main {
 		return false;
 	}
 
-	// Get position i, j from numpad
+	// Get position from row and column number
 	private static int[] getPosition() {
-		int num = getInputNumber();
+		int[] pos = new int[2];
 
-		int[][] pos = {{2, 0}, {2, 1}, {2, 2}, {1, 0}, {1, 1}, {1, 2}, {0, 0}, {0, 1}, {0, 2}};
-		return pos[num - 1];
+		System.out.printf("Row:");
+		pos[0] = getInputNumber();
+
+		System.out.printf("Column:");
+		pos[1] = getInputNumber();
+
+		return pos;
 	}
 
 	// print TicTacToe board
