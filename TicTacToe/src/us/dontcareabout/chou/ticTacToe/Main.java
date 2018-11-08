@@ -114,7 +114,16 @@ public class Main {
 		int len = playBoard.length;
 		System.out.println("TicTacToe:");
 
+		System.out.printf(" ");
+
 		for (int idx = 0; idx < len; idx++) {
+			System.out.printf(String.valueOf(idx));
+		}
+
+		System.out.printf("\n");
+
+		for (int idx = 0; idx < len; idx++) {
+			System.out.printf(String.valueOf(idx));
 			System.out.println(playBoard[idx]);
 		}
 	}
