@@ -9,9 +9,9 @@ public class Main {
 		char[][] playBoard;
 		playBoard = new char[N][N];
 
-		for (int i=0; i<N; i++) {
-			for (int j=0;j<N;j++) {
-				playBoard[i][j] ='-';
+		for (int i = 0; i < N; i++) {
+			for (int j = 0; j < N; j++) {
+				playBoard[i][j] = '-';
 			}
 		}
 
@@ -32,18 +32,17 @@ public class Main {
 			int[] pos = getPosition();
 
 			if (placeStone(pos[0], pos[1], player1, playBoard)) {
-
 				System.out.println();
 				printBoard(playBoard);
+
 				if (checkWin(pos[0], pos[1], playBoard)) {
 					System.out.println(playerName + " wins!");
 					break;
 				}
+
 				player1 = !player1;        // switch player
 				turns += 1;
 			}
-
-
 		}
 
 		if (turns == 9) {
@@ -59,34 +58,47 @@ public class Main {
 	 */
 	private static boolean checkWin(int i, int j, char[][] playBoard) {
 		char marker = playBoard[i][j];
-		boolean checkRow = true, checkColumn = true;
+		int countRow = 0;
+		int countColumn = 0;
+		int countDiagonal = 0;
+		int countDiagonal2 = 0;
 
-		for (int idx = 0; idx < 3; idx++) {
-			if (playBoard[i][idx] != marker) {
-				checkRow = false;
-				break;
+		for (int i2 = 0; i2 < N; i2++) {
+			for (int j2 = 0; j2 < N; j2++) {
+				//check row
+				if (i2 == i) {
+					if (playBoard[i2][j2] == marker) {
+						countRow += 1;
+					}
+				}
+				//check column
+				if (j2 == j) {
+					if (playBoard[i2][j2] == marker) {
+						countColumn += 1;
+					}
+				}
+				//check diagonal
+				if (i == j) {
+					if (i2 == j2) {
+						if (playBoard[i2][j2] == marker) {
+							countDiagonal += 1;
+						}
+					}
+				}
+				//check another diagonal
+				if (i + j == N - 1) {
+					if (i2 + j2 == N - 1) {
+						if (playBoard[i2][j2] == marker) {
+							countDiagonal2 += 1;
+						}
+					}
+				}
 			}
 		}
-		for (int idx = 0; idx < 3; idx++) {
-			if (playBoard[idx][j] != marker) {
-				checkColumn = false;
-				break;
-			}
-		}
 
-		if (checkRow || checkColumn) {
+		if (countColumn == N || countRow == N || countDiagonal == N || countDiagonal2 == N) {
 			return true;
 		}
-
-		if (playBoard[1][1] == marker && ((i + j) % 2 == 0)) {
-			if (playBoard[0][0] == marker && playBoard[2][2] == marker) {
-				return true;
-			}
-			if (playBoard[0][2] == marker && playBoard[2][0] == marker) {
-				return true;
-			}
-		}
-
 		return false;
 	}
 
