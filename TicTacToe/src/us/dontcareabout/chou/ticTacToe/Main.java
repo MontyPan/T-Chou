@@ -6,8 +6,7 @@ public class Main {
 	public static final int N = 3;
 
 	public static void main(String[] args) {
-		char[][] playBoard;
-		playBoard = new char[N][N];
+		char[][] playBoard = new char[N][N];
 
 		for (int i = 0; i < N; i++) {
 			for (int j = 0; j < N; j++) {
@@ -21,7 +20,7 @@ public class Main {
 		printBoard(playBoard);
 		int turns = 0;
 
-		while (turns < 9) {
+		while (turns < N * N) {
 			if (player1) {
 				playerName = "Player 1";
 			} else {
@@ -45,7 +44,7 @@ public class Main {
 			}
 		}
 
-		if (turns == 9) {
+		if (turns == N * N) {
 			System.out.println("Tie!");
 		}
 
