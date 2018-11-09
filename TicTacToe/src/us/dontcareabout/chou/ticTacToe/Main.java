@@ -105,11 +105,11 @@ public class Main {
 	private static int[] getPosition() {
 		int[] pos = new int[2];
 
-		System.out.printf("(row column):");
-		String input = getInputNumber();
+		System.out.printf("Row:");
+		pos[0] = getInputNumber();
 
-		pos[0] = Integer.valueOf(input.split(" ")[0]);
-		pos[1] = Integer.valueOf(input.split(" ")[1]);
+		System.out.printf("Column:");
+		pos[1] = getInputNumber();
 
 		return pos;
 	}
@@ -159,9 +159,9 @@ public class Main {
 	}
 
 	@SuppressWarnings("resource")
-	private static String getInputNumber() {
+	private static int getInputNumber() {
 		Scanner scanner = new Scanner(System.in);
-		return scanner.nextLine();
+		return scanner.nextInt();
 	}
 
 }
