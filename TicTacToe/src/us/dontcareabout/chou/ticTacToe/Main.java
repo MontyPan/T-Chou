@@ -101,15 +101,16 @@ public class Main {
 		return false;
 	}
 
-	// Get position from row and column number
+	// Get position i, j from numpad
 	private static int[] getPosition() {
 		int[] pos = new int[2];
 
-		System.out.printf("Row:");
-		pos[0] = getInputNumber();
+		int input = getInputNumber();
+		int row = N - 1 - ((input - 1) / N);
+		int column = (input - 1) % N;
 
-		System.out.printf("Column:");
-		pos[1] = getInputNumber();
+		pos[0] = row;
+		pos[1] = column;
 
 		return pos;
 	}
