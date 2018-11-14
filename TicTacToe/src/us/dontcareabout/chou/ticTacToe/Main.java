@@ -1,5 +1,6 @@
 package us.dontcareabout.chou.ticTacToe;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
@@ -10,7 +11,7 @@ public class Main {
 
 		for (int i = 0; i < N; i++) {
 			for (int j = 0; j < N; j++) {
-				playBoard[i][j] = '-';
+				playBoard[i][j] = ' ';
 			}
 		}
 
@@ -118,19 +119,44 @@ public class Main {
 	// print TicTacToe board
 	private static void printBoard(char[][] playBoard) {
 		int len = playBoard.length;
-		System.out.println("TicTacToe:");
+		char[] columnSep = new char[len];
+		char[] rowSep = new char[2 * len];
 
-		System.out.printf(" ");
-
+		// separator between coloumn
 		for (int idx = 0; idx < len; idx++) {
-			System.out.printf(String.valueOf(idx));
+			if (idx == len - 1) {
+				columnSep[idx] = ' ';
+			} else {
+				columnSep[idx] = '|';
+			}
 		}
 
-		System.out.printf("\n");
+		// seperator between row
+		for (int idx = 0; idx < 2 * len; idx++) {
+			if (idx == 2 * len - 1) {
+				rowSep[idx] = ' ';
+			} else {
+				if (idx % 2 == 0) {
+					rowSep[idx] = '-';
+				} else {
+					rowSep[idx] = '+';
+				}
+			}
+		}
+
+		System.out.println("TicTacToe:");
 
 		for (int idx = 0; idx < len; idx++) {
-			System.out.printf(String.valueOf(idx));
-			System.out.println(playBoard[idx]);
+			for (int idx2 = 0; idx2 < len; idx2++) {
+				System.out.printf("%c", playBoard[idx][idx2]);
+				System.out.printf("%c", columnSep[idx2]);
+			}
+			System.out.printf("\n");
+
+			if (idx != len - 1) {
+				System.out.printf(String.valueOf(rowSep));
+				System.out.printf("\n");
+			}
 		}
 	}
 
@@ -150,7 +176,7 @@ public class Main {
 			marker = 'X';
 		}
 
-		if (playBoard[i][j] == '-') {
+		if (playBoard[i][j] == ' ') {
 			playBoard[i][j] = marker;
 			return true;
 		} else {
