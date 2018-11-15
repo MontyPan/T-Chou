@@ -107,7 +107,7 @@ public class Main {
 		int[] pos = new int[2];
 
 		int input = getInputNumber();
-		int row = N - 1 - ((input - 1) / N);
+		int row = (input - 1) / N;
 		int column = (input - 1) % N;
 
 		pos[0] = row;
