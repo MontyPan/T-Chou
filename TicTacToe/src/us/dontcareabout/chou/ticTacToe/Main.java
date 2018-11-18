@@ -75,7 +75,7 @@ public class Main {
 			}
 		}
 
-		for (int idx = 0; idx < count2Three.length; i++) {
+		for (int idx = 0; idx < count2Three.length; idx++) {
 			if (count2Three[idx] == N) {
 				return true;
 			}
