@@ -58,46 +58,27 @@ public class Main {
 	 */
 	private static boolean checkWin(int i, int j, char[][] playBoard) {
 		char marker = playBoard[i][j];
-		int countRow = 0;
-		int countColumn = 0;
-		int countDiagonal = 0;
-		int countDiagonal2 = 0;
+		int[] count2Three = {0, 0, 0, 0};
 
-		for (int i2 = 0; i2 < N; i2++) {
-			for (int j2 = 0; j2 < N; j2++) {
-				//check row
-				if (i2 == i) {
-					if (playBoard[i2][j2] == marker) {
-						countRow += 1;
-					}
-				}
-				//check column
-				if (j2 == j) {
-					if (playBoard[i2][j2] == marker) {
-						countColumn += 1;
-					}
-				}
-				//check diagonal
-				if (i == j) {
-					if (i2 == j2) {
-						if (playBoard[i2][j2] == marker) {
-							countDiagonal += 1;
-						}
-					}
-				}
-				//check another diagonal
-				if (i + j == N - 1) {
-					if (i2 + j2 == N - 1) {
-						if (playBoard[i2][j2] == marker) {
-							countDiagonal2 += 1;
-						}
-					}
-				}
+		for (int idx = 0; idx < N; idx++) {
+			if (playBoard[i][idx] == marker) {
+				count2Three[0] += 1;
+			}
+			if (playBoard[idx][j] == marker) {
+				count2Three[1] += 1;
+			}
+			if (playBoard[idx][idx] == marker) {
+				count2Three[2] += 1;
+			}
+			if (playBoard[idx][N - 1 - idx] == marker) {
+				count2Three[3] += 1;
 			}
 		}
 
-		if (countColumn == N || countRow == N || countDiagonal == N || countDiagonal2 == N) {
-			return true;
+		for (int idx = 0; idx < count2Three.length; i++) {
+			if (count2Three[idx] == N) {
+				return true;
+			}
 		}
 		return false;
 	}
