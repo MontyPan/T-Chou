@@ -100,60 +100,33 @@ public class Main {
 	// print TicTacToe board
 	private static void printBoard(char[][] playBoard) {
 		int len = playBoard.length;
-		int[][] inputBoard = new int[len][len];
-		char[] columnSep = new char[len];
-		char[] rowSep = new char[2 * len];
 
 		// create inputBoard
+		String[][] inputBoard = new String[len][len];
 		for (int idx = 0; idx < len; idx++) {
 			for (int idx2 = 0; idx2 < len; idx2++) {
-				inputBoard[idx][idx2] = idx * len + idx2 + 1;
-			}
-		}
-
-		// separator between coloumn
-		for (int idx = 0; idx < len; idx++) {
-			if (idx == len - 1) {
-				columnSep[idx] = ' ';
-			} else {
-				columnSep[idx] = '|';
+				inputBoard[idx][idx2] = String.valueOf(idx * len + idx2 + 1);
 			}
 		}
 
 		// seperator between row
-		for (int idx = 0; idx < 2 * len; idx++) {
-			if (idx == 2 * len - 1) {
-				rowSep[idx] = ' ';
-			} else {
-				if (idx % 2 == 0) {
-					rowSep[idx] = '-';
-				} else {
-					rowSep[idx] = '+';
-				}
-			}
-		}
+		String[] rowSep = new String[len];
+		Arrays.fill(rowSep, "-");
 
 		System.out.println("TicTacToe:");
 
 		for (int idx = 0; idx < len; idx++) {
 			// print playBoard row
-			for (int idx2 = 0; idx2 < len; idx2++) {
-				System.out.printf("%c", playBoard[idx][idx2]);
-				System.out.printf("%c", columnSep[idx2]);
-			}
-
+			System.out.printf(String.join("|", String.valueOf(playBoard[idx]).split("")));
 			System.out.printf("          ");
 			// print inputBoard row
-			for (int idx2 = 0; idx2 < len; idx2++) {
-				System.out.printf("%d", inputBoard[idx][idx2]);
-				System.out.printf("%c", columnSep[idx2]);
-			}
-
+			System.out.printf(String.join("|", inputBoard[idx]));
 			System.out.printf("\n");
+			// print row grid
 			if (idx != len - 1) {
-				System.out.printf(String.valueOf(rowSep));
+				System.out.printf(String.join("+", rowSep));
 				System.out.printf("          ");
-				System.out.printf(String.valueOf(rowSep));
+				System.out.printf(String.join("+", rowSep));
 				System.out.printf("\n");
 			}
 		}
