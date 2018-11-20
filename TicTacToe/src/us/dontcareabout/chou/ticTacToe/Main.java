@@ -1,6 +1,5 @@
 package us.dontcareabout.chou.ticTacToe;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
@@ -102,22 +101,27 @@ public class Main {
 		int len = playBoard.length;
 
 		// create inputBoard
-		String[][] inputBoard = new String[len][len];
+		char[][] inputBoard = new char[len][len];
+
 		for (int idx = 0; idx < len; idx++) {
 			for (int idx2 = 0; idx2 < len; idx2++) {
-				inputBoard[idx][idx2] = String.valueOf(idx * len + idx2 + 1);
+				int fillNumber = idx * len + idx2 + 1;
+				inputBoard[idx][idx2] = (char) (fillNumber + '0');
 			}
 		}
 
 		// seperator between row
-		String[] rowSep = new String[len];
-		Arrays.fill(rowSep, "-");
+		char[] rowSep = new char[len];
+
+		for (int idx = 0; idx < len; idx++) {
+			rowSep[idx] = '-';
+		}
 
 		System.out.println("TicTacToe:");
 
 		for (int idx = 0; idx < len; idx++) {
-			// test charArray2String
-			String a = charArray2String(playBoard[idx], "-");
+			// test
+			String a = charArray2String(rowSep, "-");
 			System.out.println(a);
 		}
 	}
