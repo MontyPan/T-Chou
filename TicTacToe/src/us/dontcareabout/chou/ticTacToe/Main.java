@@ -116,20 +116,27 @@ public class Main {
 		System.out.println("TicTacToe:");
 
 		for (int idx = 0; idx < len; idx++) {
-			// print playBoard row
-			System.out.printf(String.join("|", String.valueOf(playBoard[idx]).split("")));
-			System.out.printf("          ");
-			// print inputBoard row
-			System.out.printf(String.join("|", inputBoard[idx]));
-			System.out.printf("\n");
-			// print row grid
+			// test charArray2String
+			String a = charArray2String(playBoard[idx], "-");
+			System.out.println(a);
+		}
+	}
+
+	/**
+	 * Convert a char array to a string
+	 */
+	private static String charArray2String(char[] charArray, String sep) {
+		int len = charArray.length;
+		String msg = "";
+
+		for (int idx = 0; idx < len; idx++) {
+			msg += charArray[idx];
+
 			if (idx != len - 1) {
-				System.out.printf(String.join("+", rowSep));
-				System.out.printf("          ");
-				System.out.printf(String.join("+", rowSep));
-				System.out.printf("\n");
+				msg += sep;
 			}
 		}
+		return msg;
 	}
 
 	/**
