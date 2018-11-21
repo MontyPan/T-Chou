@@ -119,10 +119,17 @@ public class Main {
 
 		System.out.println("TicTacToe:");
 
+		// print out boards
 		for (int idx = 0; idx < len; idx++) {
-			// test
-			String a = charArray2String(rowSep, "-");
-			System.out.println(a);
+			String board1 = charArray2String(playBoard[idx], "|");
+			String board2 = charArray2String(inputBoard[idx], "|");
+			String spaces = "        ";
+			System.out.println(board1 + spaces + board2);
+
+			if (idx != len - 1) {
+				String grid = charArray2String(rowSep, "+");
+				System.out.println(grid + spaces + grid);
+			}
 		}
 	}
 
