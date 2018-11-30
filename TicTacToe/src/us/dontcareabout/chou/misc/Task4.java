@@ -14,19 +14,17 @@ public class Task4 {
 	 * @return result[0] 是最長平台的數字，result[1] 是長度
 	 */
 	private static int[] longest(int[] data) {
-		int count = 1;
-		int targetNum = -1;
-		int maxCount = 0;
+		int pointer = 1;
+		Integer targetNum = null;
+		int maxCount = 1;
 
 		for (int idx = 1; idx < data.length; idx++) {
-			if (data[idx] != data[idx - 1]) {
-				count = 0;
-			}
-			count += 1;
-
-			if (count > maxCount) {
-				targetNum = data[idx - 1];
-				maxCount = count;
+			if (data[idx] == data[pointer]) {
+				targetNum = data[idx];
+				maxCount += 1;
+			} else if (idx + maxCount < data.length && data[idx] == data[idx + maxCount]) {
+				pointer = idx;
+				idx = idx - 1 + maxCount;
 			}
 		}
 		return new int[]{targetNum, maxCount};
