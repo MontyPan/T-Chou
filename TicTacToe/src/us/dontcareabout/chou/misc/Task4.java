@@ -28,8 +28,8 @@ public class Task4 {
 	 * @return result[0] 是最長平台的數字，result[1] 是長度
 	 */
 	private static int[] longest(int[] data) {
-		int pointer = 1;
-		Integer targetNum = null;
+		int pointer = 0;
+		int targetNum = data[0];
 		int maxCount = 1;
 
 		for (int idx = 1; idx < data.length; idx++) {
