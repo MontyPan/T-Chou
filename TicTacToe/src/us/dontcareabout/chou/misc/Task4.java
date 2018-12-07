@@ -3,10 +3,24 @@ package us.dontcareabout.chou.misc;
 import java.util.Arrays;
 
 public class Task4 {
+	//XXX 大多數情況下用到三維陣列是不允許的，不過現在就... 只能先這樣了
+	private static final int[][][] TEST_CASE = {
+			{{5, 5, 6, 6, 78, 78, 78, 9487, 9487, 9487, 9487, 65535}, {9487, 4}},
+			{{5, 6, 6, 6, 9, 10}, {6, 3}},
+			//XXX 為什麼我上一行還是給了一個逗號在結尾呢？
+	};
+
 	public static void main(String[] args) {
-		int[] data = {5, 5, 6, 6, 78, 78, 78, 9487, 9487, 9487, 9487, 65535};
-		int[] result = longest(data);
-		System.out.println(Arrays.toString(result));
+		for (int[][] aCase : TEST_CASE) {
+			if (!test(aCase[0], aCase[1])) {
+				//對不起，我還是不習慣用 printf()...... (艸
+				System.out.println(
+						"Case " + Arrays.toString(aCase[0]) + " FAILED. " +
+								" Expect " + Arrays.toString(aCase[1]) +
+								", but get " + Arrays.toString(longest(aCase[0]))
+				);
+			}
+		}
 	}
 
 	/**
@@ -29,4 +43,10 @@ public class Task4 {
 		}
 		return new int[]{targetNum, maxCount};
 	}
+
+	private static boolean test(int[] data, int[] answer) {
+		int[] result = longest(data);
+		return answer[0] == result[0] && answer[1] == result[1];
+	}
+
 }
