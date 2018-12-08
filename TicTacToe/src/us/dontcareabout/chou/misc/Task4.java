@@ -36,9 +36,8 @@ public class Task4 {
 			if (data[idx] == data[pointer]) {
 				targetNum = data[idx];
 				maxCount += 1;
-			} else if (idx + maxCount < data.length && data[idx] == data[idx + maxCount]) {
-				pointer = idx;
-				idx = idx - 1 + maxCount;
+			} else {
+				pointer = idx - (maxCount - 1);
 			}
 		}
 		return new int[]{targetNum, maxCount};
