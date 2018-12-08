@@ -85,8 +85,19 @@ public class Main {
 	// Get position i, j from numpad
 	private static int[] getPosition() {
 		int[] pos = new int[2];
+		int input = -1;
+		boolean inputValid = false;
 
-		int input = getInputNumber();
+		while (!inputValid) {
+			input = getInputNumber();
+
+			if (input >= 1 & input <= 9) {
+				inputValid = true;
+			} else {
+				System.out.print("Please input a number between 1 and 9:");
+			}
+		}
+
 		int row = (input - 1) / N;
 		int column = (input - 1) % N;
 
