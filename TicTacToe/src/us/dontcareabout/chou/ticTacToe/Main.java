@@ -183,11 +183,16 @@ public class Main {
 		int number = -1;
 
 		while (!valid) {
-			number = scanner.nextInt();
+			try {
+				number = scanner.nextInt();
 
-			if (number >= 1 && number <= 9) {
-				valid = true;
-			} else {
+				if (number >= 1 && number <= 9) {
+					valid = true;
+				} else {
+					System.out.print("Please input a number between 1 and 9:");
+				}
+			} catch (Exception e) {
+				scanner.next();
 				System.out.print("Please input a number between 1 and 9:");
 			}
 		}
