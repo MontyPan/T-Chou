@@ -1,5 +1,6 @@
 package us.dontcareabout.chou.ticTacToe;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
@@ -179,24 +180,32 @@ public class Main {
 	@SuppressWarnings("resource")
 	private static int getInputNumber() {
 		Scanner scanner = new Scanner(System.in);
-		boolean valid = false;
-		int number = -1;
+		int number;
 
-		while (!valid) {
+		while (true) {
 			try {
 				number = scanner.nextInt();
-
-				if (number >= 1 && number <= 9) {
-					valid = true;
-				} else {
-					System.out.print("Please input a number between 1 and 9:");
-				}
-			} catch (Exception e) {
+				validateNumber(number);
+				break;
+			} catch (InputMismatchException ime) {
 				scanner.next();
-				System.out.print("Please input a number between 1 and 9:");
+				System.out.println(ime);
+			} catch (Exception e) {
+				System.out.println(e);
 			}
+			System.out.print("Please input a number between 1 and 9:");
 		}
 		return number;
 	}
 
+	/**
+	 * validate input number
+	 *
+	 * @throws Exception when number isn't between 1 and 9
+	 */
+	private static void validateNumber(int number) throws Exception {
+		if (number < 1 || number > 9) {
+			throw new Exception("Number must be between 1 and 9");
+		}
+	}
 }
