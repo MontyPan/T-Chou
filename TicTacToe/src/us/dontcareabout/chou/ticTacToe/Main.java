@@ -195,15 +195,4 @@ public class Main {
 		}
 		return number;
 	}
-
-	/**
-	 * validate input number
-	 *
-	 * @throws Exception when number isn't between 1 and 9
-	 */
-	private static void validateNumber(int number) throws Exception {
-		if (number < 1 || number > 9) {
-			throw new Exception("Number must be between 1 and 9");
-		}
-	}
 }
