@@ -86,8 +86,16 @@ public class Main {
 	// Get position i, j from numpad
 	private static int[] getPosition() {
 		int[] pos = new int[2];
+		int input;
 
-		int input = getInputNumber();
+		while (true) {
+			try {
+				input = getInputNumber();
+				break;
+			} catch (Exception e) {
+				System.out.print("Please input a number between 1 and 9:");
+			}
+		}
 
 		int row = (input - 1) / N;
 		int column = (input - 1) % N;
@@ -178,22 +186,12 @@ public class Main {
 	}
 
 	@SuppressWarnings("resource")
-	private static int getInputNumber() {
+	private static int getInputNumber() throws Exception {
 		Scanner scanner = new Scanner(System.in);
-		int number;
+		int number = scanner.nextInt();
 
-		while (true) {
-			try {
-				number = scanner.nextInt();
-				validateNumber(number);
-				break;
-			} catch (InputMismatchException ime) {
-				scanner.next();
-				System.out.println(ime);
-			} catch (Exception e) {
-				System.out.println(e);
-			}
-			System.out.print("Please input a number between 1 and 9:");
+		if (number < 1 || number > 9) {
+			throw new Exception("Number must be between 1 and 9");
 		}
 		return number;
 	}
