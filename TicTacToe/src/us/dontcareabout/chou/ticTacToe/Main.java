@@ -1,5 +1,6 @@
 package us.dontcareabout.chou.ticTacToe;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
@@ -85,8 +86,17 @@ public class Main {
 	// Get position i, j from numpad
 	private static int[] getPosition() {
 		int[] pos = new int[2];
+		int input;
 
-		int input = getInputNumber();
+		while (true) {
+			try {
+				input = getInputNumber();
+				break;
+			} catch (Exception e) {
+				System.out.print("Please input a number between 1 and 9:");
+			}
+		}
+
 		int row = (input - 1) / N;
 		int column = (input - 1) % N;
 
@@ -176,9 +186,13 @@ public class Main {
 	}
 
 	@SuppressWarnings("resource")
-	private static int getInputNumber() {
+	private static int getInputNumber() throws Exception {
 		Scanner scanner = new Scanner(System.in);
-		return scanner.nextInt();
-	}
+		int number = scanner.nextInt();
 
+		if (number < 1 || number > 9) {
+			throw new Exception("Number must be between 1 and 9");
+		}
+		return number;
+	}
 }
