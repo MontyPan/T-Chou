@@ -14,12 +14,16 @@ public class Task6 {
 		System.out.println("Armstrong numbers:");
 
 		for (int i = 100; i < 1000; i++) {
-			int a = parse(i, 2);
-			int b = parse(i, 1);
-			int c = parse(i, 0);
+			int[] digit = new int[3];
+			int sum = 0;
 
-			if (Math.pow(a, 3) + Math.pow(b, 3) + Math.pow(c, 3) == i) {
-				System.out.println("" + a + b + c);
+			for (int j = 0; j < 3; j++) {
+				digit[j] = parse(i, j);
+				sum += Math.pow(digit[j], 3);
+			}
+
+			if (sum == i) {
+				System.out.println(i);
 			}
 		}
 	}
