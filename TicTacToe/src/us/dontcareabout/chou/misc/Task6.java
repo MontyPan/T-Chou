@@ -14,13 +14,22 @@ public class Task6 {
 		System.out.println("Armstrong numbers:");
 
 		for (int i = 100; i < 1000; i++) {
-			int a = i / 100;
-			int b = (i % 100) / 10;
-			int c = i % 10;
+			int a = parse(i, 2);
+			int b = parse(i, 1);
+			int c = parse(i, 0);
 
 			if (Math.pow(a, 3) + Math.pow(b, 3) + Math.pow(c, 3) == i) {
 				System.out.println("" + a + b + c);
 			}
 		}
+	}
+
+	/**
+	 * Parsing a digit of a number from any place.
+	 */
+	public static int parse(int number, int index) {
+		int digit = (int) (number / Math.pow(10, index) % 10);
+
+		return digit;
 	}
 }
