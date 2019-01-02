@@ -13,6 +13,7 @@ public class Task6 {
 	public static void main(String[] args) {
 		System.out.println("Armstrong numbers:");
 
+		//version 1
 		for (int i = 100; i < 1000; i++) {
 			int[] digit = new int[3];
 			int sum = 0;
@@ -24,6 +25,17 @@ public class Task6 {
 
 			if (sum == i) {
 				System.out.println(i);
+			}
+		}
+
+		// version 2
+		for (int a = 1; a <= 9; a++) {
+			for (int b = 0; b <= 9; b++) {
+				for (int c = 0; c <= 9; c++) {
+					if (Math.pow(a, 3) + Math.pow(b, 3) + Math.pow(c, 3) == (100 * a + 10 * b + c)) {
+						System.out.println("" + a + b + c);
+					}
+				}
 			}
 		}
 	}
