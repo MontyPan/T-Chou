@@ -14,8 +14,15 @@ public class Task6 {
 		System.out.println("Armstrong numbers:");
 
 		//version 1
+		armstrongNumber1();
+
+		// version 2
+		armstrongNumber(3, 3, 0, 0);
+	}
+
+	public static void armstrongNumber1() {
+		int[] digit = new int[3];
 		for (int i = 100; i < 1000; i++) {
-			int[] digit = new int[3];
 			int sum = 0;
 
 			for (int j = 0; j < 3; j++) {
@@ -27,9 +34,6 @@ public class Task6 {
 				System.out.println(i);
 			}
 		}
-
-		// version 2
-		armstrongNumber(3, 3, 0, 0);
 	}
 
 	public static void armstrongNumber(int digits, int index, int number, int cubedSum) {
