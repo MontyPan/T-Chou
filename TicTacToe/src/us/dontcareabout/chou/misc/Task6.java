@@ -16,8 +16,11 @@ public class Task6 {
 		//version 1
 		armstrongNumber1();
 
-		// version 2
-		armstrongNumber(3, 3, 0, 0);
+		//version 2
+		armstrongNumber2();
+
+		//version 3
+		armstrongNumber3(3, 3, 0, 0);
 	}
 
 	public static void armstrongNumber1() {
@@ -36,13 +39,25 @@ public class Task6 {
 		}
 	}
 
-	public static void armstrongNumber(int digits, int index, int number, int cubedSum) {
+	public static void armstrongNumber2() {
+		for (int a = 1; a <= 9; a++) {
+			for (int b = 0; b <= 9; b++) {
+				for (int c = 0; c <= 9; c++) {
+					if (Math.pow(a, 3) + Math.pow(b, 3) + Math.pow(c, 3) == (100 * a + 10 * b + c)) {
+						System.out.println("" + a + b + c);
+					}
+				}
+			}
+		}
+	}
+
+	public static void armstrongNumber3(int digits, int index, int number, int cubedSum) {
 		if (index > 0) {
 			for (int i = 0; i <= 9; i++) {
 				int num = (int) (number + i * Math.pow(10, index - 1));
 				int cubed = (int) (cubedSum + Math.pow(i, digits));
 
-				armstrongNumber(digits, index - 1, num, cubed);
+				armstrongNumber3(digits, index - 1, num, cubed);
 			}
 		} else if (index == 0) {
 			if (number == cubedSum & number / Math.pow(10, digits - 1) >= 1) {
