@@ -3,6 +3,7 @@ package us.dontcareabout.chou.ticTacToe;
 public class Board {
 	public static final int N = 3;
 	char[][] playBoard = new char[N][N];
+	boolean player = true;
 
 	public Board() {
 		System.out.println("Board");
@@ -14,6 +15,31 @@ public class Board {
 			for (int j = 0; j < N; j++) {
 				playBoard[i][j] = ' ';
 			}
+		}
+	}
+
+	/**
+	 * place stones on position i, j.
+	 *
+	 * @param i number of row
+	 * @param j number of column
+	 * @return true if the position i, j is empty where stones can be placed.
+	 */
+	public boolean placeStone(int i, int j) {
+		char marker = ' ';
+
+		if (player) {
+			marker = 'O';
+		} else {
+			marker = 'X';
+		}
+
+		if (playBoard[i][j] == ' ') {
+			playBoard[i][j] = marker;
+			return true;
+		} else {
+			System.out.println("The posistion " + i + j + " is not available!");
+			return false;
 		}
 	}
 
