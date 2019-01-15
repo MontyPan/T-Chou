@@ -70,8 +70,6 @@ public class Task6 {
 	 * Parsing a digit of a number from any place.
 	 */
 	public static int parse(int number, int index) {
-		int digit = (int) (number / Math.pow(10, index) % 10);
-
-		return digit;
+		return (int) (number / Math.pow(10, index) % 10);
 	}
 }
