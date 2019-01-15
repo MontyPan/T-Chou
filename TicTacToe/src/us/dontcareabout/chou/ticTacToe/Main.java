@@ -1,54 +1,44 @@
 package us.dontcareabout.chou.ticTacToe;
 
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
 	public static final int N = 3;
 
 	public static void main(String[] args) {
-		char[][] playBoard = new char[N][N];
+		Board board = new Board();
+		board.printBoard();
 
-		for (int i = 0; i < N; i++) {
-			for (int j = 0; j < N; j++) {
-				playBoard[i][j] = ' ';
-			}
-		}
-
-		boolean player1 = true;
-		String playerName = "";
-
-		printBoard(playBoard);
+		int maxTurn = board.N * board.N;
 		int turns = 0;
+		String playerName;
 
-		while (turns < N * N) {
-			if (player1) {
-				playerName = "Player 1";
+		while (turns < maxTurn) {
+			if (board.player) {
+				playerName = "player 1";
 			} else {
-				playerName = "Player 2";
+				playerName = "player 2";
 			}
 
 			System.out.println(playerName + " input:");
 			int[] pos = getPosition();
 
-			if (placeStone(pos[0], pos[1], player1, playBoard)) {
+			if (board.placeStone(pos[0], pos[1])) {
 				System.out.println();
-				printBoard(playBoard);
+				board.printBoard();
 
-				if (checkWin(pos[0], pos[1], playBoard)) {
+				if (board.checkWin(pos[0], pos[1])) {
 					System.out.println(playerName + " wins!");
 					break;
 				}
-
-				player1 = !player1;        // switch player
+				board.player = !board.player;
 				turns += 1;
 			}
 		}
 
-		if (turns == N * N) {
+		if (turns == maxTurn) {
 			System.out.println("Tie!");
 		}
-
 	}
 
 	/**
