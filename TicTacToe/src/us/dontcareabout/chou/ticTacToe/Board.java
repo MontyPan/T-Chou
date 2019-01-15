@@ -70,7 +70,7 @@ public class Board {
 			playBoard[i][j] = marker;
 			return true;
 		} else {
-			System.out.println("The posistion " + i + j + " is not available!");
+			System.out.println("The position " + i + ", " + j + " is not available!");
 			return false;
 		}
 	}
