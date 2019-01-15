@@ -60,7 +60,7 @@ public class Task6 {
 				armstrongNumber3(digits, index - 1, num, cubed);
 			}
 		} else if (index == 0) {
-			if (number == cubedSum & number / Math.pow(10, digits - 1) >= 1) {
+			if (number == cubedSum && number / Math.pow(10, digits - 1) >= 1) {
 				System.out.println(number);
 			}
 		}
