@@ -19,6 +19,38 @@ public class Board {
 	}
 
 	/**
+	 * @param i the last input of row
+	 * @param j the last input of column
+	 * @return true if the last input makes the player win.
+	 */
+	public boolean checkWin(int i, int j) {
+		char marker = playBoard[i][j];
+		int[] count2Three = {0, 0, 0, 0};
+
+		for (int idx = 0; idx < N; idx++) {
+			if (playBoard[i][idx] == marker) {
+				count2Three[0] += 1;
+			}
+			if (playBoard[idx][j] == marker) {
+				count2Three[1] += 1;
+			}
+			if (playBoard[idx][idx] == marker) {
+				count2Three[2] += 1;
+			}
+			if (playBoard[idx][N - 1 - idx] == marker) {
+				count2Three[3] += 1;
+			}
+		}
+
+		for (int idx = 0; idx < count2Three.length; idx++) {
+			if (count2Three[idx] == N) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
 	 * place stones on position i, j.
 	 *
 	 * @param i number of row
