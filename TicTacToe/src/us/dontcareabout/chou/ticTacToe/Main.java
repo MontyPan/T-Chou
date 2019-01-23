@@ -66,7 +66,7 @@ public class Main {
 	}
 
 	// print TicTacToe board
-	private static void printBoard(char[][] playBoard) {
+	private static void printBoard(Boolean[][] playBoard) {
 		int len = playBoard.length;
 
 		// create inputBoard
@@ -90,13 +90,13 @@ public class Main {
 
 		// print out boards
 		for (int idx = 0; idx < len; idx++) {
-			String board1 = charArray2String(playBoard[idx], "|");
-			String board2 = charArray2String(inputBoard[idx], "|");
+			String board1 = array2String(playBoard[idx], "|");
+			String board2 = array2String(inputBoard[idx], "|");
 			String spaces = "        ";
 			System.out.println(board1 + spaces + board2);
 
 			if (idx != len - 1) {
-				String grid = charArray2String(rowSep, "+");
+				String grid = array2String(rowSep, "+");
 				System.out.println(grid + spaces + grid);
 			}
 		}
@@ -105,12 +105,29 @@ public class Main {
 	/**
 	 * Convert a char array to a string
 	 */
-	private static String charArray2String(char[] charArray, String sep) {
-		int len = charArray.length;
+	private static String array2String(char[] array, String sep) {
+		int len = array.length;
 		String msg = "";
 
 		for (int idx = 0; idx < len; idx++) {
-			msg += charArray[idx];
+			msg += array[idx];
+
+			if (idx != len - 1) {
+				msg += sep;
+			}
+		}
+		return msg;
+	}
+
+	/**
+	 * Convert a Boolean array to a string
+	 */
+	private static String array2String(Boolean[] array, String sep) {
+		int len = array.length;
+		String msg = "";
+
+		for (int idx = 0; idx < len; idx++) {
+			msg += String.valueOf(array[idx]).charAt(0);
 
 			if (idx != len - 1) {
 				msg += sep;
