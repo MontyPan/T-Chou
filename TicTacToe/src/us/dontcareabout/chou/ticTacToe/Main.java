@@ -7,7 +7,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		Board board = new Board();
-		board.printBoard();
+		printBoard(board.playBoard);
 
 		int maxTurn = board.N * board.N;
 		int turns = 0;
@@ -25,7 +25,7 @@ public class Main {
 
 			if (board.placeStone(pos[0], pos[1])) {
 				System.out.println();
-				board.printBoard();
+				printBoard(board.playBoard);
 
 				if (board.checkWin(pos[0], pos[1])) {
 					System.out.println(playerName + " wins!");
@@ -41,37 +41,6 @@ public class Main {
 		}
 	}
 
-	/**
-	 * @param i the last input of row
-	 * @param j the last input of column
-	 * @return true if the last input makes the player win.
-	 */
-	private static boolean checkWin(int i, int j, char[][] playBoard) {
-		char marker = playBoard[i][j];
-		int[] count2Three = {0, 0, 0, 0};
-
-		for (int idx = 0; idx < N; idx++) {
-			if (playBoard[i][idx] == marker) {
-				count2Three[0] += 1;
-			}
-			if (playBoard[idx][j] == marker) {
-				count2Three[1] += 1;
-			}
-			if (playBoard[idx][idx] == marker) {
-				count2Three[2] += 1;
-			}
-			if (playBoard[idx][N - 1 - idx] == marker) {
-				count2Three[3] += 1;
-			}
-		}
-
-		for (int idx = 0; idx < count2Three.length; idx++) {
-			if (count2Three[idx] == N) {
-				return true;
-			}
-		}
-		return false;
-	}
 
 	// Get position i, j from numpad
 	private static int[] getPosition() {
@@ -150,30 +119,6 @@ public class Main {
 		return msg;
 	}
 
-	/**
-	 * place stones on position i, j.
-	 *
-	 * @param i number of row
-	 * @param j number of column
-	 * @return true if the position i, j is empty where stones can be placed.
-	 */
-	private static boolean placeStone(int i, int j, boolean player, char[][] playBoard) {
-		char marker = '-';
-
-		if (player) {
-			marker = 'O';
-		} else {
-			marker = 'X';
-		}
-
-		if (playBoard[i][j] == ' ') {
-			playBoard[i][j] = marker;
-			return true;
-		} else {
-			System.out.println("The position " + i + ", " + j + " is not available.");
-			return false;
-		}
-	}
 
 	@SuppressWarnings("resource")
 	private static int getInputNumber() throws Exception {
