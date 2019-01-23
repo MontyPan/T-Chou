@@ -2,7 +2,7 @@ package us.dontcareabout.chou.ticTacToe;
 
 public class Board {
 	public static final int N = 3;
-	char[][] playBoard = new char[N][N];
+	Boolean[][] playBoard = new Boolean[N][N];
 	boolean player = true;
 
 	public Board() {
@@ -13,7 +13,7 @@ public class Board {
 	public void initBoard() {
 		for (int i = 0; i < N; i++) {
 			for (int j = 0; j < N; j++) {
-				playBoard[i][j] = ' ';
+				playBoard[i][j] = null;
 			}
 		}
 	}
@@ -24,7 +24,7 @@ public class Board {
 	 * @return true if the last input makes the player win.
 	 */
 	public boolean checkWin(int i, int j) {
-		char marker = playBoard[i][j];
+		Boolean marker = playBoard[i][j];
 		int[] count2Three = {0, 0, 0, 0};
 
 		for (int idx = 0; idx < N; idx++) {
@@ -58,15 +58,9 @@ public class Board {
 	 * @return true if the position i, j is empty where stones can be placed.
 	 */
 	public boolean placeStone(int i, int j) {
-		char marker = ' ';
+		boolean marker = player;
 
-		if (player) {
-			marker = 'O';
-		} else {
-			marker = 'X';
-		}
-
-		if (playBoard[i][j] == ' ') {
+		if (playBoard[i][j] == null) {
 			playBoard[i][j] = marker;
 			return true;
 		} else {
