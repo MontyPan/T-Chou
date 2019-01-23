@@ -68,4 +68,11 @@ public class Board {
 			return false;
 		}
 	}
+
+	/**
+	 * @return the status of position i, j
+	 */
+	public Boolean getStatus(int i, int j) {
+		return playBoard[i][j];
+	}
 }
