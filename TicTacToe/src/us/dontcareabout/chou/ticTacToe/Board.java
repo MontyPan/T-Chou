@@ -51,7 +51,6 @@ public class Board {
 			playBoard[i][j] = marker;
 			return true;
 		} else {
-			System.out.println("The position " + i + ", " + j + " is not available!");
 			return false;
 		}
 	}

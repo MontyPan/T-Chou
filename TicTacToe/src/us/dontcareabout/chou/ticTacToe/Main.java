@@ -32,6 +32,8 @@ public class Main {
 				}
 				board.player = !board.player;
 				turns += 1;
+			} else {
+				System.out.println("Position " + pos[0] + ", " + pos[1] + " is not available");
 			}
 		}
 
