@@ -13,7 +13,7 @@ public class Main {
 		String playerName;
 
 		while (turns < maxTurn) {
-			if (board.player) {
+			if (board.currentPlayer()) {
 				playerName = "player 1";
 			} else {
 				playerName = "player 2";
@@ -30,7 +30,7 @@ public class Main {
 					System.out.println(playerName + " wins!");
 					break;
 				}
-				board.player = !board.player;
+				board.switchPlayer();
 				turns += 1;
 			} else {
 				System.out.println("Position " + pos[0] + ", " + pos[1] + " is not available");

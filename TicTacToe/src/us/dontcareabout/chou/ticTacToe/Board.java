@@ -3,7 +3,7 @@ package us.dontcareabout.chou.ticTacToe;
 public class Board {
 	public static final int N = 3;
 	private Boolean[][] playBoard = new Boolean[N][N];
-	boolean player = true;
+	private boolean player = true;
 
 	/**
 	 * @param i the last input of row
@@ -60,5 +60,16 @@ public class Board {
 	 */
 	public Boolean getStatus(int i, int j) {
 		return playBoard[i][j];
+	}
+
+	/**
+	 * @return current player
+	 */
+	public boolean currentPlayer() {
+		return player;
+	}
+
+	public void switchPlayer() {
+		player = !player;
 	}
 }
