@@ -6,7 +6,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		Board board = new Board();
-		printBoard(board.playBoard);
+		printBoard(board);
 
 		int maxTurn = Board.N * Board.N;
 		int turns = 0;
@@ -24,7 +24,7 @@ public class Main {
 
 			if (board.placeStone(pos[0], pos[1])) {
 				System.out.println();
-				printBoard(board.playBoard);
+				printBoard(board);
 
 				if (board.checkWin(pos[0], pos[1])) {
 					System.out.println(playerName + " wins!");
@@ -67,16 +67,20 @@ public class Main {
 	}
 
 	// print TicTacToe board
-	private static void printBoard(Boolean[][] playBoard) {
-		int len = playBoard.length;
+	private static void printBoard(Board board) {
+		int len = Board.N;
 
 		// create inputBoard
 		char[][] inputBoard = new char[len][len];
+		char[][] playBoard = new char[len][len];
 
 		for (int idx = 0; idx < len; idx++) {
 			for (int idx2 = 0; idx2 < len; idx2++) {
 				int fillNumber = idx * len + idx2 + 1;
 				inputBoard[idx][idx2] = (char) (fillNumber + '0');
+
+				Boolean value = board.getStatus(idx, idx2);
+				playBoard[idx][idx2] = String.valueOf(value).charAt(0);
 			}
 		}
 
@@ -112,23 +116,6 @@ public class Main {
 
 		for (int idx = 0; idx < len; idx++) {
 			msg += array[idx];
-
-			if (idx != len - 1) {
-				msg += sep;
-			}
-		}
-		return msg;
-	}
-
-	/**
-	 * Convert a Boolean array to a string
-	 */
-	private static String array2String(Boolean[] array, String sep) {
-		int len = array.length;
-		String msg = "";
-
-		for (int idx = 0; idx < len; idx++) {
-			msg += String.valueOf(array[idx]).charAt(0);
 
 			if (idx != len - 1) {
 				msg += sep;

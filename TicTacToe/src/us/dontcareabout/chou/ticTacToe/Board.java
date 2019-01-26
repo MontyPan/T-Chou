@@ -2,7 +2,7 @@ package us.dontcareabout.chou.ticTacToe;
 
 public class Board {
 	public static final int N = 3;
-	Boolean[][] playBoard = new Boolean[N][N];
+	private Boolean[][] playBoard = new Boolean[N][N];
 	boolean player = true;
 
 	/**
