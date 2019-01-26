@@ -5,19 +5,6 @@ public class Board {
 	Boolean[][] playBoard = new Boolean[N][N];
 	boolean player = true;
 
-	public Board() {
-		System.out.println("Board");
-		initBoard();
-	}
-
-	public void initBoard() {
-		for (int i = 0; i < N; i++) {
-			for (int j = 0; j < N; j++) {
-				playBoard[i][j] = null;
-			}
-		}
-	}
-
 	/**
 	 * @param i the last input of row
 	 * @param j the last input of column
