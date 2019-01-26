@@ -3,13 +3,12 @@ package us.dontcareabout.chou.ticTacToe;
 import java.util.Scanner;
 
 public class Main {
-	public static final int N = 3;
 
 	public static void main(String[] args) {
 		Board board = new Board();
 		printBoard(board.playBoard);
 
-		int maxTurn = board.N * board.N;
+		int maxTurn = Board.N * Board.N;
 		int turns = 0;
 		String playerName;
 
@@ -56,8 +55,8 @@ public class Main {
 			}
 		}
 
-		int row = (input - 1) / N;
-		int column = (input - 1) % N;
+		int row = (input - 1) / Board.N;
+		int column = (input - 1) % Board.N;
 
 		pos[0] = row;
 		pos[1] = column;
