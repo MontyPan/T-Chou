@@ -14,7 +14,7 @@ public class ShowBoard {
 				inputBoard[idx][idx2] = (char) (fillNumber + '0');
 
 				Boolean value = board.getStatus(idx, idx2);
-				playBoard[idx][idx2] = String.valueOf(value).charAt(0);
+				playBoard[idx][idx2] = getMark(value);
 			}
 		}
 
@@ -39,6 +39,21 @@ public class ShowBoard {
 				System.out.println(grid + spaces + grid);
 			}
 		}
+	}
+
+	/**
+	 * turn Boolean value to char value for player
+	 */
+	private char getMark(Boolean player) {
+		if (player != null && player) {
+			return 'O';
+		}
+
+		if (player != null && !player) {
+			return 'X';
+		}
+
+		return ' ';
 	}
 
 	/**
