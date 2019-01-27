@@ -65,7 +65,7 @@ public class Board {
 	/**
 	 * @return current player
 	 */
-	public boolean currentPlayer() {
+	public boolean getCurrentPlayer() {
 		return player;
 	}
 

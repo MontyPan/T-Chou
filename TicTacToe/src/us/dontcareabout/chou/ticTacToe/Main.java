@@ -13,7 +13,7 @@ public class Main {
 		String playerName;
 
 		while (turns < maxTurn) {
-			if (board.currentPlayer()) {
+			if (board.getCurrentPlayer()) {
 				playerName = "player 1";
 			} else {
 				playerName = "player 2";
