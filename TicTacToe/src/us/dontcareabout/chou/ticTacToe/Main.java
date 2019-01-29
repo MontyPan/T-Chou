@@ -6,8 +6,8 @@ public class Main {
 
 	public static void main(String[] args) {
 		Board board = new Board();
-		ShowBoard showBoard = new ShowBoard();
-		showBoard.printBoard(board);
+		Game game = new Game();
+		game.printBoard(board);
 
 		int maxTurn = Board.N * Board.N;
 		int turns = 0;
@@ -25,7 +25,7 @@ public class Main {
 
 			if (board.placeStone(pos[0], pos[1])) {
 				System.out.println();
-				showBoard.printBoard(board);
+				game.printBoard(board);
 
 				if (board.checkWin(pos[0], pos[1])) {
 					System.out.println(playerName + " wins!");

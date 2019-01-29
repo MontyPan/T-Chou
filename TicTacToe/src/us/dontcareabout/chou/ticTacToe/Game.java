@@ -1,11 +1,11 @@
 package us.dontcareabout.chou.ticTacToe;
 
-public class ShowBoard {
+public class Game {
 	private int N = Board.N;
 	private char[][] inputBoard = new char[N][N];
 	private char[] rowSep = new char[N];
 
-	public ShowBoard() {
+	public Game() {
 		for (int idx = 0; idx < N; idx++) {
 			for (int idx2 = 0; idx2 < N; idx2++) {
 				int fillNumber = idx * N + idx2 + 1;
