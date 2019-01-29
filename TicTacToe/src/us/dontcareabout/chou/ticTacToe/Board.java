@@ -70,4 +70,19 @@ public class Board {
 	public void switchPlayer() {
 		player = !player;
 	}
+
+	/**
+	 * @return true if playBoard still has empty space
+	 */
+	public boolean hasEmpty() {
+		for (int i = 0; i < N; i++) {
+			for (int j = 0; j < N; j++) {
+				if (playBoard[i][j] == null) {
+					return true;
+				}
+			}
+		}
+
+		return false;
+	}
 }

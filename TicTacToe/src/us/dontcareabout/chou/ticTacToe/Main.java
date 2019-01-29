@@ -7,11 +7,14 @@ public class Main {
 		Game game = new Game();
 		game.printBoard(board);
 
-		int maxTurn = Board.N * Board.N;
-		int turns = 0;
 		String playerName;
 
-		while (turns < maxTurn) {
+		while (true) {
+			if (!board.hasEmpty()) {
+				System.out.println("Tie!");
+				break;
+			}
+
 			playerName = game.getName(board.getCurrentPlayer());
 
 			System.out.println(playerName + " input:");
@@ -26,14 +29,9 @@ public class Main {
 					break;
 				}
 				board.switchPlayer();
-				turns += 1;
 			} else {
 				System.out.println("Position " + pos[0] + ", " + pos[1] + " is not available");
 			}
-		}
-
-		if (turns == maxTurn) {
-			System.out.println("Tie!");
 		}
 	}
 }
