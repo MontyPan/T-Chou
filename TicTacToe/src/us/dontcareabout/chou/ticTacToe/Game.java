@@ -1,5 +1,7 @@
 package us.dontcareabout.chou.ticTacToe;
 
+import java.util.Scanner;
+
 public class Game {
 	private int N = Board.N;
 	private char[][] inputBoard = new char[N][N];
@@ -71,5 +73,41 @@ public class Game {
 			}
 		}
 		return msg;
+	}
+
+	/**
+	 * @return a coordinate of a number on inputBoard
+	 */
+	public int[] getPosition() {
+		int[] pos = new int[2];
+		int input;
+
+		while (true) {
+			try {
+				input = getInputNumber();
+				break;
+			} catch (Exception e) {
+				System.out.print("Please input a number between 1 and 9:");
+			}
+		}
+
+		int row = (input - 1) / Board.N;
+		int column = (input - 1) % Board.N;
+
+		pos[0] = row;
+		pos[1] = column;
+
+		return pos;
+	}
+
+	@SuppressWarnings("resource")
+	private int getInputNumber() throws Exception {
+		Scanner scanner = new Scanner(System.in);
+		int number = scanner.nextInt();
+
+		if (number < 1 || number > 9) {
+			throw new Exception("Number must be between 1 and 9");
+		}
+		return number;
 	}
 }
