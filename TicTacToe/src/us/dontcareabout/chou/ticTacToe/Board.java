@@ -45,14 +45,12 @@ public class Board {
 	 * @return true if the position i, j is empty where stones can be placed.
 	 */
 	public boolean placeStone(int i, int j) {
-		boolean marker = player;
-
-		if (playBoard[i][j] == null) {
-			playBoard[i][j] = marker;
-			return true;
-		} else {
+		if (playBoard[i][j] != null) {
 			return false;
 		}
+
+		playBoard[i][j] = player;
+		return true;
 	}
 
 	/**
