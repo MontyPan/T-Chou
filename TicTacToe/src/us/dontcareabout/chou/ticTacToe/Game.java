@@ -59,6 +59,17 @@ public class Game {
 	}
 
 	/**
+	 * turn Boolean value to player name
+	 */
+	public String getName(boolean player) {
+		if (player) {
+			return "Player 1";
+		}
+
+		return "Player 2";
+	}
+
+	/**
 	 * Convert a char array to a string
 	 */
 	private String array2String(char[] array, String sep) {

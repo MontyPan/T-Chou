@@ -12,11 +12,7 @@ public class Main {
 		String playerName;
 
 		while (turns < maxTurn) {
-			if (board.getCurrentPlayer()) {
-				playerName = "player 1";
-			} else {
-				playerName = "player 2";
-			}
+			playerName = game.getName(board.getCurrentPlayer());
 
 			System.out.println(playerName + " input:");
 			int[] pos = game.getPosition();
