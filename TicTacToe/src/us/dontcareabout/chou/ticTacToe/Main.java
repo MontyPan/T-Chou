@@ -4,8 +4,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		Board board = new Board();
-		Game game = new Game();
-		game.printBoard(board);
+		Game game = new Game(board);
 
 		boolean isEnd = false;
 
@@ -14,7 +13,7 @@ public class Main {
 				System.out.println("Tie!");
 				break;
 			}
-			isEnd = game.playGame(board);
+			isEnd = game.playGame();
 		}
 
 		if (isEnd) {

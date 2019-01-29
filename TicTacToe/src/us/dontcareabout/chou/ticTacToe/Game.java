@@ -6,8 +6,11 @@ public class Game {
 	private int N = Board.N;
 	private char[][] inputBoard = new char[N][N];
 	private char[] rowSep = new char[N];
+	private Board board;
 
-	public Game() {
+	public Game(Board playBoard) {
+		board = playBoard;
+
 		for (int idx = 0; idx < N; idx++) {
 			for (int idx2 = 0; idx2 < N; idx2++) {
 				int fillNumber = idx * N + idx2 + 1;
@@ -15,19 +18,20 @@ public class Game {
 			}
 			rowSep[idx] = '-';
 		}
+		printBoard();
 	}
 
 	/**
 	 * @return true if the game is end by a player
 	 */
-	public boolean playGame(Board board) {
+	public boolean playGame() {
 		String player = getName(board.getCurrentPlayer());
 		System.out.println(player + " input:");
 		int[] pos = getPosition();
 
 		if (board.placeStone(pos[0], pos[1])) {
 			System.out.println();
-			printBoard(board);
+			printBoard();
 
 			if (board.checkWin(pos[0], pos[1])) {
 				return true;
@@ -39,7 +43,7 @@ public class Game {
 		return false;
 	}
 
-	public void printBoard(Board board) {
+	public void printBoard() {
 		char[][] playBoard = new char[N][N];
 
 		for (int idx = 0; idx < N; idx++) {
