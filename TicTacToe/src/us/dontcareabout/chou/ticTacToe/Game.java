@@ -17,6 +17,28 @@ public class Game {
 		}
 	}
 
+	/**
+	 * @return true if the game is end by a player
+	 */
+	public boolean playGame(Board board) {
+		String player = getName(board.getCurrentPlayer());
+		System.out.println(player + " input:");
+		int[] pos = getPosition();
+
+		if (board.placeStone(pos[0], pos[1])) {
+			System.out.println();
+			printBoard(board);
+
+			if (board.checkWin(pos[0], pos[1])) {
+				return true;
+			}
+			board.switchPlayer();
+		} else {
+			System.out.println("Position " + pos[0] + ", " + pos[1] + " is not available");
+		}
+		return false;
+	}
+
 	public void printBoard(Board board) {
 		char[][] playBoard = new char[N][N];
 
@@ -89,7 +111,7 @@ public class Game {
 	/**
 	 * @return a coordinate of a number on inputBoard
 	 */
-	public int[] getPosition() {
+	private int[] getPosition() {
 		int[] pos = new int[2];
 		int input;
 

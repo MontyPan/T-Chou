@@ -7,31 +7,19 @@ public class Main {
 		Game game = new Game();
 		game.printBoard(board);
 
-		String playerName;
+		boolean isEnd = false;
 
-		while (true) {
+		while (!isEnd) {
 			if (!board.hasEmpty()) {
 				System.out.println("Tie!");
 				break;
 			}
+			isEnd = game.playGame(board);
+		}
 
-			playerName = game.getName(board.getCurrentPlayer());
-
-			System.out.println(playerName + " input:");
-			int[] pos = game.getPosition();
-
-			if (board.placeStone(pos[0], pos[1])) {
-				System.out.println();
-				game.printBoard(board);
-
-				if (board.checkWin(pos[0], pos[1])) {
-					System.out.println(playerName + " wins!");
-					break;
-				}
-				board.switchPlayer();
-			} else {
-				System.out.println("Position " + pos[0] + ", " + pos[1] + " is not available");
-			}
+		if (isEnd) {
+			String winner = game.getName(board.getCurrentPlayer());
+			System.out.println(winner + " wins!");
 		}
 	}
 }
