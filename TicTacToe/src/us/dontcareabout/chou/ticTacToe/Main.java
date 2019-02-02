@@ -7,18 +7,8 @@ public class Main {
 		Game game = new Game(board);
 
 		boolean isEnd = false;
-
 		while (!isEnd) {
-			if (!board.hasEmpty()) {
-				System.out.println("Tie!");
-				break;
-			}
 			isEnd = game.playGame();
-		}
-
-		if (isEnd) {
-			String winner = game.getName(board.getCurrentPlayer());
-			System.out.println(winner + " wins!");
 		}
 	}
 }

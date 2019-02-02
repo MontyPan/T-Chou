@@ -22,9 +22,14 @@ public class Game {
 	}
 
 	/**
-	 * @return true if the game is end by a player
+	 * @return true if the game is end
 	 */
 	public boolean playGame() {
+		if (!board.hasEmpty()) {
+			System.out.println("Tie!");
+			return true;
+		}
+
 		String player = getName(board.getCurrentPlayer());
 		System.out.println(player + " input:");
 		int[] pos = getPosition();
@@ -34,6 +39,8 @@ public class Game {
 			printBoard();
 
 			if (board.checkWin(pos[0], pos[1])) {
+				String winner = getName(board.getCurrentPlayer());
+				System.out.println(winner + " wins!");
 				return true;
 			}
 			board.switchPlayer();
@@ -87,7 +94,7 @@ public class Game {
 	/**
 	 * turn Boolean value to player name
 	 */
-	public String getName(boolean player) {
+	private String getName(boolean player) {
 		if (player) {
 			return "Player 1";
 		}
