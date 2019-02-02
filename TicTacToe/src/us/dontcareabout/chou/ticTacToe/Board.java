@@ -1,5 +1,7 @@
 package us.dontcareabout.chou.ticTacToe;
 
+import java.util.Arrays;
+
 public class Board {
 	public static final int N = 3;
 	private Boolean[][] playBoard = new Boolean[N][N];
@@ -76,13 +78,10 @@ public class Board {
 	 */
 	public boolean hasEmpty() {
 		for (int i = 0; i < N; i++) {
-			for (int j = 0; j < N; j++) {
-				if (playBoard[i][j] == null) {
-					return true;
-				}
+			if (Arrays.asList(playBoard[i]).contains(null)) {
+				return true;
 			}
 		}
-
 		return false;
 	}
 }
