@@ -79,15 +79,15 @@ public class Game {
 	 * turn Boolean value to char value for player
 	 */
 	private char getMark(Boolean player) {
-		if (player != null && player) {
+		if (player == null) {
+			return ' ';
+		}
+
+		if (player) {
 			return 'O';
 		}
 
-		if (player != null && !player) {
-			return 'X';
-		}
-
-		return ' ';
+		return 'X';
 	}
 
 	/**
