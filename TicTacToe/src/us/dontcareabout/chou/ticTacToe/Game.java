@@ -8,8 +8,8 @@ public class Game {
 	private char[] rowSep = new char[N];
 	private Board board;
 
-	public Game(Board playBoard) {
-		board = playBoard;
+	public Game() {
+		board = new Board();
 
 		for (int idx = 0; idx < N; idx++) {
 			for (int idx2 = 0; idx2 < N; idx2++) {
@@ -39,8 +39,7 @@ public class Game {
 			printBoard();
 
 			if (board.checkWin(pos[0], pos[1])) {
-				String winner = getName(board.getCurrentPlayer());
-				System.out.println(winner + " wins!");
+				System.out.println(player + " wins!");
 				return true;
 			}
 			board.switchPlayer();
