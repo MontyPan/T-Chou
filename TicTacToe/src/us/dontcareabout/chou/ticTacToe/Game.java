@@ -30,7 +30,7 @@ public class Game {
 			}
 			board.switchPlayer();
 		} else {
-			System.out.println("Position " + pos[0] + ", " + pos[1] + " is not available");
+			inputError(pos);
 		}
 		return false;
 	}
@@ -41,5 +41,9 @@ public class Game {
 			return;
 		}
 		System.out.println(io.getName(winner) + " wins!");
+	}
+
+	private void inputError(int[] pos) {
+		System.out.println("Position " + pos[0] + ", " + pos[1] + " is not available");
 	}
 }
