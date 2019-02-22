@@ -30,20 +30,12 @@ public class Game {
 			}
 			board.switchPlayer();
 		} else {
-			inputError(pos);
+			io.inputError(pos);
 		}
 		return false;
 	}
 
 	public void showResult() {
-		if (winner == null) {
-			System.out.println("Tie!");
-			return;
-		}
-		System.out.println(io.getName(winner) + " wins!");
-	}
-
-	private void inputError(int[] pos) {
-		System.out.println("Position " + pos[0] + ", " + pos[1] + " is not available");
+		io.showResult(winner);
 	}
 }

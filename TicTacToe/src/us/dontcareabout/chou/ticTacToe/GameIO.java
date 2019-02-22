@@ -125,5 +125,16 @@ public class GameIO {
 		return number;
 	}
 
+	public void showResult(Boolean winner) {
+		if (winner == null) {
+			System.out.println("Tie!");
+			return;
+		}
+		System.out.println(getName(winner) + " wins!");
+	}
+
+	public void inputError(int[] pos) {
+		System.out.println("Position " + pos[0] + ", " + pos[1] + " is not available");
+	}
 }
 
