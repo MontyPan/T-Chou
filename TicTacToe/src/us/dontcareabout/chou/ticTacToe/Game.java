@@ -10,29 +10,28 @@ public class Game {
 	}
 
 	/**
-	 * @return true if the game is end
+	 * @return true if the game is still going
 	 */
-	public boolean playGame() {
+	public boolean round() {
 		if (!board.hasEmpty()) {
-			return true;
+			return false;
 		}
 
 		String player = io.getName(board.getCurrentPlayer());
 		int[] pos = io.getPosition(player);
 
 		if (board.placeStone(pos[0], pos[1])) {
-			System.out.println();
 			io.printBoard(board);
 
 			if (board.checkWin(pos[0], pos[1])) {
 				winner = board.getCurrentPlayer();
-				return true;
+				return false;
 			}
 			board.switchPlayer();
 		} else {
 			io.inputError(pos);
 		}
-		return false;
+		return true;
 	}
 
 	public void showResult() {

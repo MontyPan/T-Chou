@@ -28,7 +28,7 @@ public class GameIO {
 			}
 		}
 
-		System.out.println("TicTacToe:");
+		System.out.println("\nTicTacToe:");
 
 		// print out boards
 		for (int idx = 0; idx < N; idx++) {
