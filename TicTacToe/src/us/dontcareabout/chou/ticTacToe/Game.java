@@ -9,10 +9,18 @@ public class Game {
 		io.printBoard(board);
 	}
 
+	public void playGame() {
+		boolean nextRound = true;
+
+		while (nextRound) {
+			nextRound = round();
+		}
+	}
+
 	/**
 	 * @return true if the game is still going
 	 */
-	public boolean round() {
+	private boolean round() {
 		if (!board.hasEmpty()) {
 			return false;
 		}
