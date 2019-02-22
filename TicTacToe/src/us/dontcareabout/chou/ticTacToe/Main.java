@@ -9,5 +9,7 @@ public class Main {
 		while (!isEnd) {
 			isEnd = game.playGame();
 		}
+
+		game.showResult();
 	}
 }

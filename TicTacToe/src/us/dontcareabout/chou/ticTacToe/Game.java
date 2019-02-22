@@ -3,6 +3,7 @@ package us.dontcareabout.chou.ticTacToe;
 public class Game {
 	private Board board = new Board();
 	private GameIO io = new GameIO();
+	private Boolean winner;
 
 	public Game() {
 		io.printBoard(board);
@@ -13,7 +14,6 @@ public class Game {
 	 */
 	public boolean playGame() {
 		if (!board.hasEmpty()) {
-			System.out.println("Tie!");
 			return true;
 		}
 
@@ -25,7 +25,7 @@ public class Game {
 			io.printBoard(board);
 
 			if (board.checkWin(pos[0], pos[1])) {
-				System.out.println(player + " wins!");
+				winner = board.getCurrentPlayer();
 				return true;
 			}
 			board.switchPlayer();
@@ -33,5 +33,13 @@ public class Game {
 			System.out.println("Position " + pos[0] + ", " + pos[1] + " is not available");
 		}
 		return false;
+	}
+
+	public void showResult() {
+		if (winner == null) {
+			System.out.println("Tie!");
+			return;
+		}
+		System.out.println(io.getName(winner) + " wins!");
 	}
 }
