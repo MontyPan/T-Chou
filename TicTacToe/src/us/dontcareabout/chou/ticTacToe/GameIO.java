@@ -88,11 +88,13 @@ public class GameIO {
 	}
 
 	/**
-	 * @return a coordinate of a number on inputBoard
+	 * @return a coordinate of a number input by player
 	 */
-	public int[] getPosition() {
+	public int[] getPosition(String player) {
 		int[] pos = new int[2];
 		int input;
+
+		System.out.println(player + " input:");
 
 		while (true) {
 			try {

@@ -18,8 +18,7 @@ public class Game {
 		}
 
 		String player = io.getName(board.getCurrentPlayer());
-		System.out.println(player + " input:");
-		int[] pos = io.getPosition();
+		int[] pos = io.getPosition(player);
 
 		if (board.placeStone(pos[0], pos[1])) {
 			System.out.println();
