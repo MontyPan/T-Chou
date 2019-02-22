@@ -62,7 +62,7 @@ public class GameIO {
 	/**
 	 * turn Boolean value to player name
 	 */
-	public String getName(boolean player) {
+	private String getName(boolean player) {
 		if (player) {
 			return "Player 1";
 		}
@@ -90,11 +90,11 @@ public class GameIO {
 	/**
 	 * @return a coordinate of a number input by player
 	 */
-	public int[] getPosition(String player) {
+	public int[] getPosition(boolean player) {
 		int[] pos = new int[2];
 		int input;
 
-		System.out.println(player + " input:");
+		System.out.println(getName(player) + " input:");
 
 		while (true) {
 			try {
