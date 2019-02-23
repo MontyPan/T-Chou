@@ -1,11 +1,10 @@
 package us.dontcareabout.chou.ticTacToe;
 
-import java.util.Arrays;
-
 public class Board {
 	public static final int N = 3;
 	private Boolean[][] playBoard = new Boolean[N][N];
 	private boolean player = true;
+	private int turn = 0;
 
 	/**
 	 * @param i the last input of row
@@ -70,6 +69,7 @@ public class Board {
 	}
 
 	public void switchPlayer() {
+		turn += 1;
 		player = !player;
 	}
 
@@ -77,10 +77,8 @@ public class Board {
 	 * @return true if playBoard still has empty space
 	 */
 	public boolean hasEmpty() {
-		for (int i = 0; i < N; i++) {
-			if (Arrays.asList(playBoard[i]).contains(null)) {
-				return true;
-			}
+		if (turn < N * N) {
+			return true;
 		}
 		return false;
 	}
