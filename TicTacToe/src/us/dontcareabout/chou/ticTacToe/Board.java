@@ -11,6 +11,7 @@ public class Board {
 	 * @param j the last input of column
 	 * @return true if the last input makes the player win.
 	 */
+	//對不起，後來發現以井字遊戲來說你這個版本可能是最佳寫法了..... (艸
 	public boolean checkWin(int i, int j) {
 		Boolean marker = playBoard[i][j];
 		int[] count2Three = {0, 0, 0, 0};
@@ -77,9 +78,6 @@ public class Board {
 	 * @return true if playBoard still has empty space
 	 */
 	public boolean hasEmpty() {
-		if (turn < N * N) {
-			return true;
-		}
-		return false;
+		return turn < N * N;
 	}
 }
