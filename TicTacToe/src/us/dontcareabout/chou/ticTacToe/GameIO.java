@@ -70,13 +70,13 @@ public class GameIO {
 	 * Convert a char array to a string
 	 */
 	private String array2String(char[] array, String sep) {
-		String msg = "" + array[0];
+		StringBuilder result = new StringBuilder("" + array[0]);
 
 		for (int idx = 1; idx < array.length; idx++) {
-			msg += sep + array[idx];
+			result.append(sep + array[idx]);
 		}
 
-		return msg;
+		return result.toString();
 	}
 
 	/**
