@@ -10,11 +10,7 @@ public class Game {
 	}
 
 	public void playGame() {
-		boolean nextRound = true;
-
-		while (nextRound) {
-			nextRound = round();
-		}
+		while (round()) {}
 	}
 
 	/**
