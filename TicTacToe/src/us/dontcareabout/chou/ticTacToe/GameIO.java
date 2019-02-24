@@ -3,19 +3,27 @@ package us.dontcareabout.chou.ticTacToe;
 import java.util.Scanner;
 
 public class GameIO {
-	private int N = Board.N;
-	private char[][] inputBoard = new char[N][N];
-	private char[] rowSep = new char[N];
+	private static final int N = Board.N;
 
+	private final String grid;
+
+	private String spaces = "        ";
+	private String[] inputBoard = new String[N];
 
 	public GameIO() {
+		char[] inputRow = new char[N];
+		char[] rowSep = new char[N];
+
 		for (int idx = 0; idx < N; idx++) {
 			for (int idx2 = 0; idx2 < N; idx2++) {
 				int fillNumber = idx * N + idx2 + 1;
-				inputBoard[idx][idx2] = (char) (fillNumber + '0');
+				inputRow[idx2] = (char) (fillNumber + '0');
 			}
+			inputBoard[idx] = array2String(inputRow, "|");
 			rowSep[idx] = '-';
 		}
+
+		grid = array2String(rowSep, "+");
 	}
 
 	public void printBoard(Board board) {
@@ -23,8 +31,7 @@ public class GameIO {
 
 		for (int idx = 0; idx < N; idx++) {
 			for (int idx2 = 0; idx2 < N; idx2++) {
-				Boolean value = board.getStatus(idx, idx2);
-				playBoard[idx][idx2] = getMark(value);
+				playBoard[idx][idx2] = getMark(board.getStatus(idx, idx2));
 			}
 		}
 
@@ -33,12 +40,9 @@ public class GameIO {
 		// print out boards
 		for (int idx = 0; idx < N; idx++) {
 			String board1 = array2String(playBoard[idx], "|");
-			String board2 = array2String(inputBoard[idx], "|");
-			String spaces = "        ";
-			System.out.println(board1 + spaces + board2);
+			System.out.println(board1 + spaces + inputBoard[idx]);
 
 			if (idx != N - 1) {
-				String grid = array2String(rowSep, "+");
 				System.out.println(grid + spaces + grid);
 			}
 		}
@@ -52,38 +56,26 @@ public class GameIO {
 			return ' ';
 		}
 
-		if (player) {
-			return 'O';
-		}
-
-		return 'X';
+		return player ? 'O' : 'X';
 	}
 
 	/**
 	 * turn Boolean value to player name
 	 */
 	private String getName(boolean player) {
-		if (player) {
-			return "Player 1";
-		}
-
-		return "Player 2";
+		return player ? "Player 1" : "Player 2";
 	}
 
 	/**
 	 * Convert a char array to a string
 	 */
 	private String array2String(char[] array, String sep) {
-		int len = array.length;
-		String msg = "";
+		String msg = "" + array[0];
 
-		for (int idx = 0; idx < len; idx++) {
-			msg += array[idx];
-
-			if (idx != len - 1) {
-				msg += sep;
-			}
+		for (int idx = 1; idx < array.length; idx++) {
+			msg += sep + array[idx];
 		}
+
 		return msg;
 	}
 
@@ -91,27 +83,18 @@ public class GameIO {
 	 * @return a coordinate of a number input by player
 	 */
 	public int[] getPosition(boolean player) {
-		int[] pos = new int[2];
-		int input;
-
 		System.out.println(getName(player) + " input:");
+
+		int input;
 
 		while (true) {
 			try {
 				input = getInputNumber();
-				break;
+				return new int[]{(input - 1) / N, (input - 1) % N};
 			} catch (Exception e) {
 				System.out.print("Please input a number between 1 and 9:");
 			}
 		}
-
-		int row = (input - 1) / Board.N;
-		int column = (input - 1) % Board.N;
-
-		pos[0] = row;
-		pos[1] = column;
-
-		return pos;
 	}
 
 	@SuppressWarnings("resource")
@@ -119,7 +102,7 @@ public class GameIO {
 		Scanner scanner = new Scanner(System.in);
 		int number = scanner.nextInt();
 
-		if (number < 1 || number > 9) {
+		if (number < 1 || number > N * N) {
 			throw new Exception("Number must be between 1 and 9");
 		}
 		return number;
@@ -128,9 +111,9 @@ public class GameIO {
 	public void showResult(Boolean winner) {
 		if (winner == null) {
 			System.out.println("Tie!");
-			return;
+		} else {
+			System.out.println(getName(winner) + " wins!");
 		}
-		System.out.println(getName(winner) + " wins!");
 	}
 
 	public void inputError(int[] pos) {
