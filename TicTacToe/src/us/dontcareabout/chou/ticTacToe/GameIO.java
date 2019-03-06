@@ -80,17 +80,14 @@ public class GameIO {
 	}
 
 	/**
-	 * @return a coordinate of a number input by player
+	 * @return a number input by player
 	 */
-	public int[] getPosition(boolean player) {
+	public int getPosition(boolean player) {
 		System.out.println(getName(player) + " input:");
-
-		int input;
 
 		while (true) {
 			try {
-				input = getInputNumber();
-				return new int[]{(input - 1) / N, (input - 1) % N};
+				return getInputNumber();
 			} catch (Exception e) {
 				System.out.print("Please input a number between 1 and 9:");
 			}
@@ -116,8 +113,8 @@ public class GameIO {
 		}
 	}
 
-	public void inputError(int[] pos) {
-		System.out.println("Position " + pos[0] + ", " + pos[1] + " is not available");
+	public void inputError(int pos) {
+		System.out.println("Position " + pos + " is not available");
 	}
 }
 

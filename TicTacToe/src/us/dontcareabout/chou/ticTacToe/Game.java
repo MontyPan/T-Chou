@@ -21,7 +21,8 @@ public class Game {
 			return false;
 		}
 
-		int[] pos = io.getPosition(board.getCurrentPlayer());
+		int input = io.getPosition(board.getCurrentPlayer());
+		int[] pos = new int[]{(input - 1) / Board.N, (input - 1) % Board.N};
 
 		if (board.placeStone(pos[0], pos[1])) {
 			io.printBoard(board);
@@ -32,7 +33,7 @@ public class Game {
 			}
 			board.switchPlayer();
 		} else {
-			io.inputError(pos);
+			io.inputError(input);
 		}
 		return true;
 	}
