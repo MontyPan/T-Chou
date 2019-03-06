@@ -13,44 +13,36 @@ public class Game {
 	}
 
 	public void playGame() {
-		while (round()) {}
-	}
-
-	/**
-	 * @return true if the game is still going
-	 */
-	private boolean round() {
-		if (!board.hasEmpty()) {
-			return false;
-		}
-
 		int input = 0;
+		int[] pos;
 
-		while (true) {
+		while (board.hasEmpty()) {
 			try {
 				input = io.getPosition(board.getCurrentPlayer());
-				break;
 			} catch (UnexceptedInputException e) {
 				io.inputError();
+				continue;
 			} catch (IllegalPositionException e) {
 				io.inputError();
+				continue;
 			}
-		}
 
-		int[] pos = new int[]{(input - 1) / Board.N, (input - 1) % Board.N};
+			pos = new int[]{(input - 1) / Board.N, (input - 1) % Board.N};
 
-		if (board.placeStone(pos[0], pos[1])) {
+			if (!board.placeStone(pos[0], pos[1])) {
+				io.inputError(input);
+				continue;
+			}
+
 			io.printBoard(board);
 
 			if (board.checkWin(pos[0], pos[1])) {
 				winner = board.getCurrentPlayer();
-				return false;
+				return;
 			}
+
 			board.switchPlayer();
-		} else {
-			io.inputError(input);
 		}
-		return true;
 	}
 
 	public void showResult() {
