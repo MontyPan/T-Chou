@@ -6,7 +6,6 @@ import us.dontcareabout.chou.ticTacToe.exception.UnexceptedInputException;
 public class Game {
 	private Board board = new Board();
 	private GameIO io = new GameIO();
-	private Boolean winner;
 
 	public Game() {
 		io.printBoard(board);
@@ -37,15 +36,13 @@ public class Game {
 			io.printBoard(board);
 
 			if (board.checkWin(pos[0], pos[1])) {
-				winner = board.getCurrentPlayer();
+				io.showWinner(board.getCurrentPlayer());
 				return;
 			}
 
 			board.switchPlayer();
 		}
-	}
 
-	public void showResult() {
-		io.showResult(winner);
+		io.showTie();
 	}
 }

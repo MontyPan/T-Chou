@@ -110,12 +110,12 @@ public class GameIO {
 		return scanner.nextInt();
 	}
 
-	public void showResult(Boolean winner) {
-		if (winner == null) {
-			System.out.println("Tie!");
-		} else {
-			System.out.println(getName(winner) + " wins!");
-		}
+	public void showWinner(boolean winner) {
+		System.out.println(getName(winner) + " wins!");
+	}
+
+	public void showTie() {
+		System.out.println("Tie!");
 	}
 
 	public void inputError() {
