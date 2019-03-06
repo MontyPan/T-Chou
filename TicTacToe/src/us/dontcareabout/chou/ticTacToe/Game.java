@@ -1,5 +1,8 @@
 package us.dontcareabout.chou.ticTacToe;
 
+import us.dontcareabout.chou.ticTacToe.exception.IllegalPositionException;
+import us.dontcareabout.chou.ticTacToe.exception.UnexceptedInputException;
+
 public class Game {
 	private Board board = new Board();
 	private GameIO io = new GameIO();
@@ -21,7 +24,19 @@ public class Game {
 			return false;
 		}
 
-		int input = io.getPosition(board.getCurrentPlayer());
+		int input = 0;
+
+		while (true) {
+			try {
+				input = io.getPosition(board.getCurrentPlayer());
+				break;
+			} catch (UnexceptedInputException e) {
+				io.inputError();
+			} catch (IllegalPositionException e) {
+				io.inputError();
+			}
+		}
+
 		int[] pos = new int[]{(input - 1) / Board.N, (input - 1) % Board.N};
 
 		if (board.placeStone(pos[0], pos[1])) {
