@@ -1,6 +1,10 @@
 package us.dontcareabout.chou.ticTacToe;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
+
+import us.dontcareabout.chou.ticTacToe.exception.IllegalPositionException;
+import us.dontcareabout.chou.ticTacToe.exception.UnexceptedInputException;
 
 public class GameIO {
 	private static final int N = Board.N;
@@ -80,44 +84,45 @@ public class GameIO {
 	}
 
 	/**
-	 * @return a coordinate of a number input by player
+	 * @return a number input by player
 	 */
-	public int[] getPosition(boolean player) {
+	public int getPosition(boolean player) throws UnexceptedInputException, IllegalPositionException {
 		System.out.println(getName(player) + " input:");
 
-		int input;
+		int result = 0;
 
-		while (true) {
-			try {
-				input = getInputNumber();
-				return new int[]{(input - 1) / N, (input - 1) % N};
-			} catch (Exception e) {
-				System.out.print("Please input a number between 1 and 9:");
+		try {
+			result = getInputNumber();
+
+			if (result < 1 || result > N * N) {
+				throw new IllegalPositionException(result);
 			}
+
+			return result;
+		} catch (InputMismatchException e) {
+			throw new UnexceptedInputException();
 		}
 	}
 
 	@SuppressWarnings("resource")
-	private int getInputNumber() throws Exception {
+	private int getInputNumber() throws InputMismatchException {
 		Scanner scanner = new Scanner(System.in);
-		int number = scanner.nextInt();
-
-		if (number < 1 || number > N * N) {
-			throw new Exception("Number must be between 1 and 9");
-		}
-		return number;
+		return scanner.nextInt();
 	}
 
-	public void showResult(Boolean winner) {
-		if (winner == null) {
-			System.out.println("Tie!");
-		} else {
-			System.out.println(getName(winner) + " wins!");
-		}
+	public void showWinner(boolean winner) {
+		System.out.println(getName(winner) + " wins!");
 	}
 
-	public void inputError(int[] pos) {
-		System.out.println("Position " + pos[0] + ", " + pos[1] + " is not available");
+	public void showTie() {
+		System.out.println("Tie!");
+	}
+
+	public void inputError() {
+		System.out.println("Please input a number between 1 and " + (N * N));
+	}
+
+	public void inputError(int pos) {
+		System.out.println("Position " + pos + " is not available");
 	}
 }
-

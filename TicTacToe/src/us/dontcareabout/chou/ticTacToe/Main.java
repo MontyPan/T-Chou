@@ -3,9 +3,6 @@ package us.dontcareabout.chou.ticTacToe;
 public class Main {
 
 	public static void main(String[] args) {
-		Game game = new Game();
-
-		game.playGame();
-		game.showResult();
+		new Game().playGame();
 	}
 }
