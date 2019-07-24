@@ -22,4 +22,11 @@
 - 結束日期：展覽結束﹙換展結束﹚日期
 
 
+### Demo 資料說明 ###
 
+「[穿上亞洲-織物的交流與想像](https://south.npm.gov.tw/ExhibitionsDetailC003110.aspx?Cond=31e50fed-09ca-439a-830c-85f0fbf4e0db&appname=Exhibition3112&State=0)」特展，展覽時間為 108 年 1 月 29 日至 108 年 7 月 28 日，展廳為 S304。(第一筆資料)
+
+期間有[換展](https://south.npm.gov.tw/ActivitiesDetailC006110.aspx?Cond=d5ab9ab1-352d-492e-9063-47c334fbb178)，共分兩次進行，每次關閉一半展廳。
+
+- 展廳A區預定於108年4月22日～108年5月3日間暫時關閉，並於5月4日重新開幕。(第二筆資料)
+- 展廳B區將於108年5月3日～108年5月8日間暫時關閉，5月9日重新開展。(第三筆資料)
