@@ -3,6 +3,9 @@ package us.dontcareabout.googleSheet;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import org.jsoup.Connection;
 import org.jsoup.Connection.Method;
 import org.jsoup.Jsoup;
@@ -53,6 +56,18 @@ public class GoogleSheet {
 		}
 
 		return combine(entryList, PAIR[2]);
+	}
+
+
+	/**
+	 * 純粹是紀念作品。
+	 * 搞不懂為啥 {@link Mapper} 那樣就行、這邊這樣搞就不行...... Orz
+	 */
+	public static <T> ArrayList<T> entry(String sheetId, int tabIndex) {
+		return new Gson().fromJson(
+			GoogleSheet.entryJson(sheetId, 1),
+			new TypeToken<ArrayList<T>>(){}.getType()
+		);
 	}
 
 	/////////////////////////////////////////////////////////
