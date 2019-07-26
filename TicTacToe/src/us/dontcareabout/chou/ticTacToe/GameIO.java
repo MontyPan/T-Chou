@@ -86,7 +86,7 @@ public class GameIO {
 	/**
 	 * @return a number input by player
 	 */
-	public int getPosition(boolean player) throws UnexceptedInputException, IllegalPositionException {
+	public void requirePosition(boolean player) throws UnexceptedInputException, IllegalPositionException {
 		System.out.println(getName(player) + " input:");
 
 		int result = 0;
@@ -98,7 +98,7 @@ public class GameIO {
 				throw new IllegalPositionException(result);
 			}
 
-			return result;
+			EventCenter.fireEvent(new InputEvent(result));
 		} catch (InputMismatchException e) {
 			throw new UnexceptedInputException();
 		}

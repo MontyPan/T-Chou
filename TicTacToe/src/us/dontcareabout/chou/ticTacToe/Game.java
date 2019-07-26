@@ -1,23 +1,32 @@
 package us.dontcareabout.chou.ticTacToe;
 
+import us.dontcareabout.chou.ticTacToe.InputEvent.InputHandler;
 import us.dontcareabout.chou.ticTacToe.exception.IllegalPositionException;
 import us.dontcareabout.chou.ticTacToe.exception.UnexceptedInputException;
 
 public class Game {
 	private Board board = new Board();
 	private GameIO io = new GameIO();
+	private boolean endFlag;
 
 	public Game() {
 		io.printBoard(board);
+
+		EventCenter.addInputHandler(new InputHandler() {
+			@Override
+			public void onInput(InputEvent event) {
+				process(event.value);
+			}
+		});
 	}
 
 	public void playGame() {
-		int input = 0;
-		int[] pos;
+		endFlag = false;
 
-		while (board.hasEmpty()) {
+		while (!endFlag && board.hasEmpty()) {
 			try {
-				input = io.getPosition(board.getCurrentPlayer());
+				//注意：requirePosition() 幣需要有能暫停程式運作的能力
+				io.requirePosition(board.getCurrentPlayer());
 			} catch (UnexceptedInputException e) {
 				io.inputError();
 				continue;
@@ -25,24 +34,29 @@ public class Game {
 				io.inputError();
 				continue;
 			}
-
-			pos = new int[]{(input - 1) / Board.N, (input - 1) % Board.N};
-
-			if (!board.placeStone(pos[0], pos[1])) {
-				io.inputError(input);
-				continue;
-			}
-
-			io.printBoard(board);
-
-			if (board.checkWin(pos[0], pos[1])) {
-				io.showWinner(board.getCurrentPlayer());
-				return;
-			}
-
-			board.switchPlayer();
 		}
 
-		io.showTie();
+		if (!endFlag) {
+			io.showTie();
+		}
+	}
+
+	private void process(int input) {
+		int[] pos = new int[]{(input - 1) / Board.N, (input - 1) % Board.N};
+
+		if (!board.placeStone(pos[0], pos[1])) {
+			io.inputError(input);
+			return;
+		}
+
+		io.printBoard(board);
+
+		if (board.checkWin(pos[0], pos[1])) {
+			io.showWinner(board.getCurrentPlayer());
+			endFlag = true;
+			return;
+		}
+
+		board.switchPlayer();
 	}
 }
