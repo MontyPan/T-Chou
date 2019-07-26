@@ -23,11 +23,7 @@ public class GoogleSheet {
 		return URL_HEAD + sheetId + "/" + tabIndex + URL_TAIL;
 	}
 
-	public static String json(String sheetId) {
-		return json(sheetId, 1);
-	}
-
-	public static String json(String sheetId, int tabIndex) {
+	public static String allJson(String sheetId, int tabIndex) {
 		Connection conn = Jsoup.connect(url(sheetId, 1))
 			.validateTLSCertificates(false).ignoreContentType(true);
 		conn.request().method(Method.GET);
@@ -42,7 +38,7 @@ public class GoogleSheet {
 	}
 
 	public static String entryJson(String sheetId, int tabIndex) {
-		String json = GoogleSheet.json(sheetId);
+		String json = GoogleSheet.allJson(sheetId, tabIndex);
 		String entry = "\"entry\":";
 		json = json.substring(json.indexOf(entry) + entry.length(), json.lastIndexOf("]") + 1);
 
