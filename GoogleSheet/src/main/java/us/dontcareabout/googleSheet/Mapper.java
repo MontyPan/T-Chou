@@ -1,9 +1,9 @@
 package us.dontcareabout.googleSheet;
 
-import java.util.ArrayList;
-
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+
+import java.util.ArrayList;
 
 public class Mapper<T> {
 	public final ArrayList<T> result;
@@ -11,8 +11,9 @@ public class Mapper<T> {
 	public Mapper(String sheetId, int tabIndex) {
 		result = new Gson().fromJson(
 				GoogleSheet.entryJson(sheetId, tabIndex),
-				new TypeToken<ArrayList<Foo>>(){}.getType()
-			);
+				new TypeToken<ArrayList<RawData>>() {
+				}.getType()
+		);
 
 	}
 }
