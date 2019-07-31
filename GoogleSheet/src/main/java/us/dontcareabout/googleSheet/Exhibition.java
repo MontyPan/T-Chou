@@ -9,14 +9,14 @@ public class Exhibition {
 	String name;
 	Date start;
 	Date end;
-	List<String> rooms;
+	List<String> rooms = new ArrayList<String>();
 	List<CloseInterval> closeIntervals = new ArrayList<CloseInterval>();
 
 	public Exhibition(RawData data) {
 		this.name = data.name;
 		this.start = data.start;
 		this.end = data.end;
-		this.rooms = Arrays.asList(data.rooms.split(","));
+		rooms.addAll(roomAsList(data.rooms));
 	}
 
 	/**
@@ -24,6 +24,24 @@ public class Exhibition {
 	 */
 	public void addChangeInfo(RawData data) {
 		closeIntervals.add(new CloseInterval(data));
+	}
+
+	/**
+	 * 將展廳資料轉為 List，並以半個展廳為最小單位。
+	 */
+	private static List<String> roomAsList(String rooms) {
+		List<String> showRooms = new ArrayList<String>();
+
+		for (String r : rooms.split(",")) {
+
+			char subRoom = r.charAt(r.length() - 1);
+			if (subRoom == 'A' || subRoom == 'B') {
+				showRooms.add(r);
+				break;
+			}
+			showRooms.addAll(Arrays.asList(r + "A", r + "B"));
+		}
+		return showRooms;
 	}
 
 	@Override
@@ -34,12 +52,12 @@ public class Exhibition {
 	private class CloseInterval {
 		Date start;
 		Date end;
-		String rooms;
+		List<String> rooms = new ArrayList<String>();
 
 		CloseInterval(RawData data) {
 			this.start = data.start;
 			this.end = data.end;
-			this.rooms = data.rooms;
+			rooms.addAll(Exhibition.roomAsList(data.rooms));
 		}
 
 		@Override
