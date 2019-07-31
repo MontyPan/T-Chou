@@ -3,14 +3,16 @@ package us.dontcareabout.googleSheet;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Exhibition {
 	String name;
 	Date start;
 	Date end;
 	List<String> rooms = new ArrayList<String>();
-	List<CloseInterval> closeIntervals = new ArrayList<CloseInterval>();
+	Map<String, DateInterval> closeIntervals = new HashMap<String, DateInterval>();
 
 	public Exhibition(RawData data) {
 		this.name = data.name;
@@ -23,7 +25,9 @@ public class Exhibition {
 	 * 新增換展資訊
 	 */
 	public void addChangeInfo(RawData data) {
-		closeIntervals.add(new CloseInterval(data));
+		for (String r : roomAsList(data.rooms)) {
+			closeIntervals.put(r, new DateInterval(data.start, data.end));
+		}
 	}
 
 	/**
@@ -47,22 +51,5 @@ public class Exhibition {
 	@Override
 	public String toString() {
 		return String.format("Exhibition:\nName: %s\nDate: %s ~ %s\nLocation: %s\nChangeInfo:\n%s\n", name, start, end, rooms, closeIntervals);
-	}
-
-	private class CloseInterval {
-		Date start;
-		Date end;
-		List<String> rooms = new ArrayList<String>();
-
-		CloseInterval(RawData data) {
-			this.start = data.start;
-			this.end = data.end;
-			rooms.addAll(Exhibition.roomAsList(data.rooms));
-		}
-
-		@Override
-		public String toString() {
-			return String.format("(%s ~ %s @%s)\n", start, end, rooms);
-		}
 	}
 }
