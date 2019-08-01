@@ -1,23 +1,22 @@
 package us.dontcareabout.googleSheet;
 
+import us.dontcareabout.googleSheet.Exceptions.DateIntervalErrorException;
+
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Exhibition {
 	String name;
-	Date start;
-	Date end;
+	DateInterval displayDate;
 	List<String> rooms = new ArrayList<String>();
 	Map<String, DateInterval> closeIntervals = new HashMap<String, DateInterval>();
 
 	public Exhibition(RawData data) {
 		this.name = data.name;
-		this.start = data.start;
-		this.end = data.end;
+		this.displayDate = new DateInterval(data.start, data.end);
 		rooms.addAll(roomAsList(data.rooms));
 	}
 
@@ -26,6 +25,10 @@ public class Exhibition {
 	 */
 	public void addChangeInfo(RawData data) {
 		for (String r : roomAsList(data.rooms)) {
+			DateInterval changeInterval = new DateInterval(data.start, data.end);
+			if (!displayDate.containInterval(changeInterval)) {
+				throw new DateIntervalErrorException(changeInterval + " is not between " + displayDate);
+			}
 			closeIntervals.put(r, new DateInterval(data.start, data.end));
 		}
 	}
@@ -50,6 +53,6 @@ public class Exhibition {
 
 	@Override
 	public String toString() {
-		return String.format("Exhibition:\nName: %s\nDate: %s ~ %s\nLocation: %s\nChangeInfo:\n%s\n", name, start, end, rooms, closeIntervals);
+		return String.format("Exhibition:\nName: %s\nDate: %s\nLocation: %s\nChangeInfo:\n%s\n", name, displayDate, rooms, closeIntervals);
 	}
 }
