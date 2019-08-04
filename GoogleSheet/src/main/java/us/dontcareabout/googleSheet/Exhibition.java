@@ -2,21 +2,19 @@ package us.dontcareabout.googleSheet;
 
 import us.dontcareabout.googleSheet.Exceptions.DateIntervalErrorException;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class Exhibition {
 	private String name;
 	private DateInterval displayDate;
-	private List<String> rooms = new ArrayList<String>();
+	private String rooms;
 	private Map<String, DateInterval> closeIntervals = new HashMap<String, DateInterval>();
 
 	public Exhibition(RawData data) {
 		this.name = data.name;
 		this.displayDate = new DateInterval(data.start, data.end);
-		rooms.addAll(ShowRoom.roomAsList(data.rooms));
+		rooms = data.rooms;
 	}
 
 	public String getName() {
@@ -27,7 +25,7 @@ public class Exhibition {
 		return displayDate;
 	}
 
-	public List<String> getRooms() {
+	public String getRooms() {
 		return rooms;
 	}
 
@@ -39,18 +37,25 @@ public class Exhibition {
 	 * 新增換展資訊
 	 */
 	public void addChangeInfo(RawData data) {
-		for (String r : ShowRoom.roomAsList(data.rooms)) {
-			DateInterval changeInterval = new DateInterval(data.start, data.end);
-			if (!displayDate.containInterval(changeInterval)) {
-				throw new DateIntervalErrorException(changeInterval + " is not between " + displayDate);
-			}
-			closeIntervals.put(r, new DateInterval(data.start, data.end));
+
+		DateInterval changeInterval = new DateInterval(data.start, data.end);
+		if (!displayDate.containInterval(changeInterval)) {
+			throw new DateIntervalErrorException(changeInterval + " is not between " + displayDate);
 		}
+		closeIntervals.put(data.rooms, new DateInterval(data.start, data.end));
+
+	}
+
+	/**
+	 * 換展次數
+	 */
+	public int getChangeTime() {
+		return closeIntervals.keySet().size();
 	}
 
 
 	@Override
 	public String toString() {
-		return String.format("Exhibition:\nName: %s\nDate: %s\nLocation: %s\nChangeInfo:\n%s\n", name, displayDate, rooms, closeIntervals);
+		return String.format("Exhibition:\nName: %s\nDate: %s\nLocation: %s\nChangeInfo (%s):\n%s\n", name, displayDate, rooms, getChangeTime(), closeIntervals);
 	}
 }
