@@ -36,7 +36,7 @@ public class Exhibition {
 	/**
 	 * 將展廳資料轉為 List，並以半個展廳為最小單位。
 	 */
-	private static List<String> roomAsList(String rooms) {
+	public static List<String> roomAsList(String rooms) {
 		List<String> showRooms = new ArrayList<String>();
 
 		for (String r : rooms.split(",")) {

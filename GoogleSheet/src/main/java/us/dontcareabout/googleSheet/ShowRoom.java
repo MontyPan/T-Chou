@@ -21,6 +21,20 @@ public class ShowRoom {
 		close.put(exhibition, new DateInterval(start, end));
 	}
 
+	/**
+	 * 一口氣建立所有展廳
+	 */
+	public static Map<String, ShowRoom> createShowRooms(String[] rooms) {
+		Map<String, ShowRoom> showRoomMap = new HashMap<String, ShowRoom>();
+
+		for (String r : rooms) {
+			for (String subRoom : Exhibition.roomAsList(r)) {
+				showRoomMap.put(subRoom, new ShowRoom(subRoom));
+			}
+		}
+		return showRoomMap;
+	}
+
 	@Override
 	public String toString() {
 		return String.format("Room: %s\nOpen: %s\nClose: %s\n", name, open, close);
