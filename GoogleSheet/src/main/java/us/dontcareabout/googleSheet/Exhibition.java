@@ -8,15 +8,31 @@ import java.util.List;
 import java.util.Map;
 
 public class Exhibition {
-	String name;
-	DateInterval displayDate;
-	List<String> rooms = new ArrayList<String>();
-	Map<String, DateInterval> closeIntervals = new HashMap<String, DateInterval>();
+	private String name;
+	private DateInterval displayDate;
+	private List<String> rooms = new ArrayList<String>();
+	private Map<String, DateInterval> closeIntervals = new HashMap<String, DateInterval>();
 
 	public Exhibition(RawData data) {
 		this.name = data.name;
 		this.displayDate = new DateInterval(data.start, data.end);
 		rooms.addAll(ShowRoom.roomAsList(data.rooms));
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public DateInterval getDisplayDate() {
+		return displayDate;
+	}
+
+	public List<String> getRooms() {
+		return rooms;
+	}
+
+	public Map<String, DateInterval> getCloseIntervals() {
+		return closeIntervals;
 	}
 
 	/**

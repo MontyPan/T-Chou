@@ -8,12 +8,24 @@ import java.util.List;
 import java.util.Map;
 
 public class ShowRoom {
-	String name;
-	Map<String, DateInterval> open = new HashMap<String, DateInterval>();
-	Map<String, DateInterval> close = new HashMap<String, DateInterval>();
+	private String name;
+	private Map<String, DateInterval> open = new HashMap<String, DateInterval>();
+	private Map<String, DateInterval> close = new HashMap<String, DateInterval>();
 
 	public ShowRoom(String name) {
 		this.name = name;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public Map<String, DateInterval> getOpen() {
+		return open;
+	}
+
+	public Map<String, DateInterval> getClose() {
+		return close;
 	}
 
 	public void addOpen(String exhibition, Date start, Date end) {

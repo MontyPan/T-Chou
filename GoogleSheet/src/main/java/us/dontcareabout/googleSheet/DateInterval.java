@@ -6,8 +6,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class DateInterval {
-	Date start;
-	Date end;
+	private Date start;
+	private Date end;
 
 	public DateInterval(Date start, Date end) {
 		if (start.getTime() >= end.getTime()) {
@@ -15,6 +15,14 @@ public class DateInterval {
 		}
 		this.start = start;
 		this.end = end;
+	}
+
+	public Date getStart() {
+		return start;
+	}
+
+	public Date getEnd() {
+		return end;
 	}
 
 	public boolean containInterval(DateInterval innerInterval) {
