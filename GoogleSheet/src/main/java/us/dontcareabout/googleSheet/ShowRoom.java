@@ -1,7 +1,10 @@
 package us.dontcareabout.googleSheet;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ShowRoom {
@@ -28,11 +31,29 @@ public class ShowRoom {
 		Map<String, ShowRoom> showRoomMap = new HashMap<String, ShowRoom>();
 
 		for (String r : rooms) {
-			for (String subRoom : Exhibition.roomAsList(r)) {
+			for (String subRoom : roomAsList(r)) {
 				showRoomMap.put(subRoom, new ShowRoom(subRoom));
 			}
 		}
 		return showRoomMap;
+	}
+
+	/**
+	 * 將展廳資料轉為 List，並以半個展廳為最小單位。
+	 */
+	public static List<String> roomAsList(String rooms) {
+		List<String> showRooms = new ArrayList<String>();
+
+		for (String r : rooms.split(",")) {
+
+			char subRoom = r.charAt(r.length() - 1);
+			if (subRoom == 'A' || subRoom == 'B') {
+				showRooms.add(r);
+				break;
+			}
+			showRooms.addAll(Arrays.asList(r + "A", r + "B"));
+		}
+		return showRooms;
 	}
 
 	@Override
