@@ -1,6 +1,6 @@
 package us.dontcareabout.googleSheet;
 
-import us.dontcareabout.googleSheet.Exceptions.DateIntervalErrorException;
+import us.dontcareabout.googleSheet.Exceptions.DateIntervalException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -40,7 +40,7 @@ public class Exhibition {
 
 		DateInterval changeInterval = new DateInterval(data.start, data.end);
 		if (!displayDate.containInterval(changeInterval)) {
-			throw new DateIntervalErrorException(changeInterval + " is not between " + displayDate);
+			throw new DateIntervalException(changeInterval + " is not between " + displayDate);
 		}
 		closeIntervals.put(data.rooms, new DateInterval(data.start, data.end));
 

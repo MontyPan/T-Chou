@@ -1,5 +1,7 @@
 package us.dontcareabout.googleSheet;
 
+import us.dontcareabout.googleSheet.Exceptions.ExihibitionNotFoundException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,7 +41,7 @@ public class Main {
 					break;
 				}
 			}
-			if (!gotInfo) throw new RuntimeException(String.format("%s not exists", d.name));
+			if (!gotInfo) throw new ExihibitionNotFoundException(String.format("%s not exists", d.name));
 		}
 		return exhibitions;
 	}
