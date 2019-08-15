@@ -10,7 +10,7 @@ public class DateInterval {
 	private Date end;
 
 	public DateInterval(Date start, Date end) {
-		if (start.getTime() >= end.getTime()) {
+		if (start.after(end)) {
 			throw new DateIntervalException("Start date is not earlier than end date");
 		}
 		this.start = start;
