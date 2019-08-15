@@ -38,7 +38,7 @@ public class Main {
 				boolean gotInfo = false;
 				for (Exhibition e : exhibitions) {
 					if (d.name.equals(e.getName())) {
-						e.addChangeInfo(d);
+						e.addCloseInfo(d);
 						gotInfo = true;
 						break;
 					}

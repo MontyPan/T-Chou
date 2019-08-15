@@ -34,28 +34,33 @@ public class Exhibition {
 	}
 
 	/**
-	 * 新增換展資訊
+	 * 新增換展件關閉展廳資訊
+	 *
+	 * @return true 當成功取得關閉展廳資訊
 	 */
-	public void addChangeInfo(RawData data) {
+	public boolean addCloseInfo(RawData data) {
+		if (!data.name.equals(this.name)) {
+			return false;
+		}
 
 		DateInterval changeInterval = new DateInterval(data.start, data.end);
 		if (!displayDate.containInterval(changeInterval)) {
 			throw new DateIntervalException(changeInterval + " is not between " + displayDate);
 		}
 		closeIntervals.put(data.rooms, new DateInterval(data.start, data.end));
-
+		return true;
 	}
 
 	/**
-	 * 換展次數
+	 * 換展件關閉展廳次數
 	 */
-	public int getChangeTime() {
-		return closeIntervals.keySet().size();
+	public int getCloseCount() {
+		return closeIntervals.size();
 	}
 
 
 	@Override
 	public String toString() {
-		return String.format("Exhibition:\nName: %s\nDate: %s\nLocation: %s\nChangeInfo (%s):\n%s\n", name, displayDate, rooms, getChangeTime(), closeIntervals);
+		return String.format("Exhibition:\nName: %s\nDate: %s\nLocation: %s\nChangeInfo (%s):\n%s\n", name, displayDate, rooms, getCloseCount(), closeIntervals);
 	}
 }
