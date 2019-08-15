@@ -9,6 +9,10 @@ public class Exhibition {
 	private String name;
 	private DateInterval displayDate;
 	private String rooms;
+
+	/**
+	 * {@link Map} closeIntervals。key: {@link String} 為展廳名稱；value: {@link DateInterval} 為關閉時間
+	 */
 	private Map<String, DateInterval> closeIntervals = new HashMap<String, DateInterval>();
 
 	public Exhibition(RawData data) {
@@ -29,6 +33,9 @@ public class Exhibition {
 		return rooms;
 	}
 
+	/**
+	 * @return {@link Map} closeIntervals。key: {@link String} 為展廳名稱；value: {@link DateInterval} 為關閉時間
+	 */
 	public Map<String, DateInterval> getCloseIntervals() {
 		return closeIntervals;
 	}

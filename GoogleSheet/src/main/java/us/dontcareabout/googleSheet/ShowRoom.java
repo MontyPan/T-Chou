@@ -19,9 +19,16 @@ public enum ShowRoom {
 	S303A("S303"), S303B("S303"),
 	S304A("S304"), S304B("S304");
 
-
 	private String parent;
+
+	/**
+	 * {@link Map} open。key: {@link String} 為展覽名稱；value: {@link DateInterval} 為開放時間
+	 */
 	private Map<String, DateInterval> open = new HashMap<String, DateInterval>();
+
+	/**
+	 * {@link Map} close。key: {@link String} 為展覽名稱；value: {@link DateInterval} 為關閉時間
+	 */
 	private Map<String, DateInterval> close = new HashMap<String, DateInterval>();
 
 	ShowRoom(String parent) {
@@ -32,10 +39,16 @@ public enum ShowRoom {
 		return parent;
 	}
 
+	/**
+	 * @return {@link Map} open。key: {@link String} 為展覽名稱；value: {@link DateInterval} 為開放時間
+	 */
 	public Map<String, DateInterval> getOpen() {
 		return open;
 	}
 
+	/**
+	 * @return {@link Map} close。key: {@link String} 為展覽名稱；value: {@link DateInterval} 為關閉時間
+	 */
 	public Map<String, DateInterval> getClose() {
 		return close;
 	}
