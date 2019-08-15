@@ -30,18 +30,21 @@ public class Main {
 		for (RawData d : dataTable) {
 			if (!d.close) {
 				exhibitions.add(new Exhibition(d));
-				continue;
 			}
+		}
 
-			boolean gotInfo = false;
-			for (Exhibition e : exhibitions) {
-				if (d.name.equals(e.getName())) {
-					e.addChangeInfo(d);
-					gotInfo = true;
-					break;
+		for (RawData d : dataTable) {
+			if (d.close) {
+				boolean gotInfo = false;
+				for (Exhibition e : exhibitions) {
+					if (d.name.equals(e.getName())) {
+						e.addChangeInfo(d);
+						gotInfo = true;
+						break;
+					}
 				}
+				if (!gotInfo) throw new ExihibitionNotFoundException(String.format("%s not exists", d.name));
 			}
-			if (!gotInfo) throw new ExihibitionNotFoundException(String.format("%s not exists", d.name));
 		}
 		return exhibitions;
 	}
