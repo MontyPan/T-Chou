@@ -1,7 +1,5 @@
 package us.dontcareabout.googleSheet;
 
-import us.dontcareabout.googleSheet.Exceptions.DateIntervalException;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -9,11 +7,16 @@ public class DateInterval {
 	private Date start;
 	private Date end;
 
-	public DateInterval(Date start, Date end) {
-		if (start.after(end)) {
-			throw new DateIntervalException("Start date is not earlier than end date");
-		}
+	public DateInterval(Date date1, Date date2) {
+		this.start = date1.before(date2) ? date1 : date2;
+		this.end = date1.after(date2) ? date1 : date2;
+	}
+
+	public void setStart(Date start) {
 		this.start = start;
+	}
+
+	public void setEnd(Date end) {
 		this.end = end;
 	}
 
@@ -26,10 +29,10 @@ public class DateInterval {
 	}
 
 	public boolean containInterval(DateInterval innerInterval) {
-		if (start.getTime() > innerInterval.start.getTime()) {
+		if (start.after(innerInterval.start)) {
 			return false;
 		}
-		if (end.getTime() < innerInterval.end.getTime()) {
+		if (end.before(innerInterval.end)) {
 			return false;
 		}
 		return true;
