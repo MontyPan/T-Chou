@@ -56,8 +56,8 @@ public class Exhibition {
 			DateInterval newInterval = null;
 			for (DateInterval d : openIntervals.get(sr)) {
 				if (d.containInterval(changeInterval)) {
-					newInterval = new DateInterval(changeInterval.getEnd(), d.getEnd());
-					d.setEnd(changeInterval.getStart());
+					newInterval = new DateInterval(DateInterval.shiftDate(changeInterval.getEnd(), 1), d.getEnd());
+					d.setEnd(DateInterval.shiftDate(changeInterval.getStart(), -1));
 					break;
 				}
 			}
@@ -81,6 +81,6 @@ public class Exhibition {
 
 	@Override
 	public String toString() {
-		return String.format("Exhibition:\nName: %s\nDate: %s\nLocation: %s\nOpen Date:\n%s\n", name, getDisplayDate(), getRooms(), getOpenIntervals());
+		return String.format("Exhibition:\nName: %s\nDate: %s\nLocation: %s\nOpen Date:\n%s\nClose count: %s\n", name, getDisplayDate(), getRooms(), getOpenIntervals(), getCloseCount());
 	}
 }
