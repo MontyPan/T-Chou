@@ -1,7 +1,5 @@
 package us.dontcareabout.googleSheet2;
 
-import us.dontcareabout.googleSheet.Exceptions.ExihibitionNotFoundException;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,54 +9,22 @@ public class Main {
 	public static void main(String[] args) {
 		ArrayList<RawData> dataTable = new Mapper<RawData>(SHEET_ID, 1).result;
 
-		for (Exhibition e : getExhibitionInfo(dataTable)) {
+		for (Exhibition2 e : getExhibitionInfo(dataTable)) {
 			System.out.println(e);
-		}
-
-		getRoomInfo(dataTable);
-		for (ShowRoom sr : ShowRoom.values()) {
-			System.out.println(sr);
 		}
 	}
 
 	/**
 	 * 取得所有展覽資訊
 	 */
-	public static List<Exhibition> getExhibitionInfo(List<RawData> dataTable) {
-		List<Exhibition> exhibitions = new ArrayList<Exhibition>();
+	public static List<Exhibition2> getExhibitionInfo(List<RawData> dataTable) {
+		List<Exhibition2> exhibitions = new ArrayList<Exhibition2>();
 
 		for (RawData d : dataTable) {
 			if (!d.close) {
-				exhibitions.add(new Exhibition(d));
-			}
-		}
-
-		for (RawData d : dataTable) {
-			if (d.close) {
-				boolean gotInfo = false;
-				for (Exhibition e : exhibitions) {
-					if (d.name.equals(e.getName())) {
-						e.addCloseInfo(d);
-						gotInfo = true;
-						break;
-					}
-				}
-				if (!gotInfo) throw new ExihibitionNotFoundException(String.format("%s not exists", d.name));
+				exhibitions.add(new Exhibition2(d));
 			}
 		}
 		return exhibitions;
-	}
-
-	public static void getRoomInfo(List<RawData> dataTable) {
-
-		for (RawData d : dataTable) {
-			for (String r : ShowRoom.roomAsList(d.rooms)) {
-				if (d.close) {
-					ShowRoom.valueOf(r).addClose(d.name, d.start, d.end);
-					break;
-				}
-				ShowRoom.valueOf(r).addOpen(d.name, d.start, d.end);
-			}
-		}
 	}
 }
