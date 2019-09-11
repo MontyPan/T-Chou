@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-public class DateInterval {
+public class DateInterval implements Comparable<DateInterval> {
 	private Date start;
 	private Date end;
 
@@ -60,5 +60,9 @@ public class DateInterval {
 		String strEnd = (end == null ? null : dateFormat.format(end));
 
 		return String.format("(%s, %s)", strStart, strEnd);
+	}
+
+	public int compareTo(DateInterval dt) {
+		return this.start.after(dt.getEnd()) ? 1 : -1;
 	}
 }
