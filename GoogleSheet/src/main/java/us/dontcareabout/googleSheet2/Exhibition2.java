@@ -6,6 +6,7 @@ import us.dontcareabout.googleSheet2.Exceptions.ExihibitionNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 public class Exhibition2 {
 	private String name;
@@ -76,8 +77,17 @@ public class Exhibition2 {
 		return openIntervals;
 	}
 
+	public Set<String> getRoom() {
+		return openIntervals.keySet();
+	}
+
+	public DateInterval getDisplayDate() {
+		ArrayList<DateInterval> intervals = openIntervals.values().iterator().next();
+		return new DateInterval(intervals.get(0).getStart(), intervals.get(intervals.size() - 1).getEnd());
+	}
+
 	@Override
 	public String toString() {
-		return String.format("Name: %s\nOpen intervals:\n%s\n", name, openIntervals);
+		return String.format("Name: %s\nShow room: %s\nDisplay Date: %s\nOpen intervals:\n%s\n", name, getRoom(), getDisplayDate(), openIntervals);
 	}
 }
