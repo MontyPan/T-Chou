@@ -1,6 +1,7 @@
 package us.dontcareabout.googleSheet2;
 
 import us.dontcareabout.googleSheet2.Exceptions.DateIntervalException;
+import us.dontcareabout.googleSheet2.Exceptions.ExihibitionNotFoundException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,7 +14,8 @@ public class Exhibition2 {
 	public Exhibition2(RawData data) {
 		this.name = data.name;
 
-		for (String r : ShowRoom.roomAsList(data.rooms)) {
+		for (String room : data.rooms.split(",")) {
+			String r = room.trim().toUpperCase();
 			openIntervals.put(r, new ArrayList<DateInterval>());
 			openIntervals.get(r).add(new DateInterval(data.start, data.end));
 		}
@@ -28,7 +30,12 @@ public class Exhibition2 {
 		if (!this.name.equals(data.name)) return false;
 		DateInterval closeInterval = new DateInterval(data.start, data.end);
 
-		for (String r : ShowRoom.roomAsList(data.rooms)) {
+		for (String room : data.rooms.split(",")) {
+			String r = room.trim().toUpperCase();
+			if (openIntervals.get(r) == null) {
+				splitRoom(r.substring(0, r.length() - 1));
+			}
+
 			DateInterval newInterval = null;
 
 			for (DateInterval d : openIntervals.get(r)) {
@@ -44,6 +51,21 @@ public class Exhibition2 {
 			openIntervals.get(r).add(newInterval);
 		}
 		return true;
+	}
+
+	public void splitRoom(String room) {
+		if (openIntervals.get(room) == null) throw new ExihibitionNotFoundException(room + " not found.");
+
+		ArrayList<DateInterval> intervals = openIntervals.get(room);
+
+		for (String r : ShowRoom.roomAsList(room)) {
+			openIntervals.put(r, new ArrayList<DateInterval>());
+			for (DateInterval di : intervals) {
+				openIntervals.get(r).add(new DateInterval(di.getStart(), di.getEnd()));
+			}
+		}
+
+		openIntervals.remove(room);
 	}
 
 	public String getName() {
