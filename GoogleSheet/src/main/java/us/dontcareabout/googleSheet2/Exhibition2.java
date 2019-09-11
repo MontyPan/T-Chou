@@ -4,6 +4,7 @@ import us.dontcareabout.googleSheet2.Exceptions.DateIntervalException;
 import us.dontcareabout.googleSheet2.Exceptions.ExihibitionNotFoundException;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -30,13 +31,29 @@ public class Exhibition2 {
 	public boolean addCloseInfo(RawData data) {
 		if (!this.name.equals(data.name)) return false;
 		DateInterval closeInterval = new DateInterval(data.start, data.end);
+		ArrayList<String> closeRoom = new ArrayList<String>();
 
+		// 讀取關閉展廳
 		for (String room : data.rooms.split(",")) {
 			String r = room.trim().toUpperCase();
-			if (openIntervals.get(r) == null) {
+			if (openIntervals.get(r) == null && r.length() == 5) {
 				splitRoom(r.substring(0, r.length() - 1));
+				closeRoom.add(r);
+				continue;
 			}
 
+			if (openIntervals.get(r) == null && r.length() == 4) {
+				for (String r2 : ShowRoom.roomAsList(r)) {
+					if (!openIntervals.keySet().contains(r2)) throw new ExihibitionNotFoundException(r + " not found.");
+					closeRoom.add(r2);
+				}
+				continue;
+			}
+			closeRoom.add(r);
+		}
+
+		// 加入關閉展廳資料
+		for (String r : closeRoom) {
 			DateInterval newInterval = null;
 
 			for (DateInterval d : openIntervals.get(r)) {
@@ -83,6 +100,7 @@ public class Exhibition2 {
 
 	public DateInterval getDisplayDate() {
 		ArrayList<DateInterval> intervals = openIntervals.values().iterator().next();
+		Collections.sort(intervals);
 		return new DateInterval(intervals.get(0).getStart(), intervals.get(intervals.size() - 1).getEnd());
 	}
 
