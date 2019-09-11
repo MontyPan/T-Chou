@@ -1,8 +1,7 @@
 package us.dontcareabout.googleSheet2;
 
-import us.dontcareabout.googleSheet.Exceptions.DateIntervalException;
-
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 public class DateInterval {
@@ -38,6 +37,19 @@ public class DateInterval {
 			return false;
 		}
 		return true;
+	}
+
+	/**
+	 * 移動日期
+	 *
+	 * @param date 移動前的日期
+	 * @param days 移動天數
+	 */
+	public static Date shiftDate(Date date, int days) {
+		Calendar c = Calendar.getInstance();
+		c.setTime(date);
+		c.add(Calendar.DATE, days);
+		return c.getTime();
 	}
 
 	@Override

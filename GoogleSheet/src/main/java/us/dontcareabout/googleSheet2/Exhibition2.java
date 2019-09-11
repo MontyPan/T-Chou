@@ -40,8 +40,8 @@ public class Exhibition2 {
 
 			for (DateInterval d : openIntervals.get(r)) {
 				if (d.containInterval(closeInterval)) {
-					newInterval = new DateInterval(closeInterval.getEnd(), d.getEnd());
-					d.setEnd(closeInterval.getStart());
+					newInterval = new DateInterval(DateInterval.shiftDate(closeInterval.getEnd(), 1), d.getEnd());
+					d.setEnd(DateInterval.shiftDate(closeInterval.getStart(), -1));
 					break;
 				}
 			}
