@@ -3,7 +3,7 @@ package us.dontcareabout.googleSheet2;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class DateInterval implements Comparable<DateInterval> {
+public class DateInterval {
 	private Date start;
 	private Date end;
 
@@ -46,13 +46,5 @@ public class DateInterval implements Comparable<DateInterval> {
 		String strEnd = (end == null ? null : dateFormat.format(end));
 
 		return String.format("(%s, %s)", strStart, strEnd);
-	}
-
-	/**
-	 * 比較此 DateInterval 的 start 與傳入的 DateInterval 的 start。
-	 */
-	@Override
-	public int compareTo(DateInterval d) {
-		return this.start.compareTo(d.getStart());
 	}
 }

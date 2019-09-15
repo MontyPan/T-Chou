@@ -5,6 +5,7 @@ import us.dontcareabout.googleSheet2.Exceptions.DateIntervalException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -51,7 +52,15 @@ public class DateIntervalArray {
 	 * @return intervals 的整段範圍
 	 */
 	public DateInterval getOverallInterval() {
-		Collections.sort(intervals);
+		intervals.sort(new Comparator<DateInterval>() {
+			/**
+			 * 比較兩個 DateInterval 的 start。
+			 */
+			@Override
+			public int compare(DateInterval d1, DateInterval d2) {
+				return d1.getStart().compareTo(d2.getStart());
+			}
+		});
 		return new DateInterval(intervals.get(0).getStart(), intervals.get(intervals.size() - 1).getEnd());
 	}
 
