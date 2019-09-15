@@ -62,7 +62,11 @@ public class DateInterval implements Comparable<DateInterval> {
 		return String.format("(%s, %s)", strStart, strEnd);
 	}
 
-	public int compareTo(DateInterval dt) {
-		return this.start.after(dt.getEnd()) ? 1 : -1;
+	/**
+	 * 比較此 DateInterval 的 start 與傳入的 DateInterval 的 start。
+	 */
+	@Override
+	public int compareTo(DateInterval d) {
+		return this.start.compareTo(d.getStart());
 	}
 }
