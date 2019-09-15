@@ -1,32 +1,30 @@
 package us.dontcareabout.googleSheet2;
 
-import us.dontcareabout.googleSheet2.Exceptions.DateIntervalException;
 import us.dontcareabout.googleSheet2.Exceptions.ExihibitionNotFoundException;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
 public class Exhibition2 {
 	private String name;
-	private Map<String, ArrayList<DateInterval>> openIntervals = new HashMap<String, ArrayList<DateInterval>>();
+	private Map<String, DateIntervalArray> openIntervals = new HashMap<String, DateIntervalArray>();
 
 	public Exhibition2(RawData data) {
 		this.name = data.name;
 
 		for (String room : data.rooms.split(",")) {
 			String r = room.trim().toUpperCase();
-			openIntervals.put(r, new ArrayList<DateInterval>());
-			openIntervals.get(r).add(new DateInterval(data.start, data.end));
+			openIntervals.put(r, new DateIntervalArray());
+			openIntervals.get(r).addInterval(data.start, data.end);
 		}
 	}
 
 	/**
 	 * 新增換展件關閉展廳資訊
 	 *
-	 * @return true 當成功加入關閉展廳資訊
+	 * @return 是否成功加入關閉展廳資訊
 	 */
 	public boolean addCloseInfo(RawData data) {
 		if (!this.name.equals(data.name)) return false;
@@ -54,33 +52,18 @@ public class Exhibition2 {
 
 		// 加入關閉展廳資料
 		for (String r : closeRoom) {
-			DateInterval newInterval = null;
-
-			for (DateInterval d : openIntervals.get(r)) {
-				if (d.containInterval(closeInterval)) {
-					newInterval = new DateInterval(DateInterval.shiftDate(closeInterval.getEnd(), 1), d.getEnd());
-					d.setEnd(DateInterval.shiftDate(closeInterval.getStart(), -1));
-					break;
-				}
-			}
-
-			if (newInterval == null) throw new DateIntervalException(closeInterval + " is not between open intervals");
-
-			openIntervals.get(r).add(newInterval);
+			openIntervals.get(r).cutInterval(closeInterval);
 		}
 		return true;
 	}
 
-	public void splitRoom(String room) {
+	private void splitRoom(String room) {
 		if (openIntervals.get(room) == null) throw new ExihibitionNotFoundException(room + " not found.");
 
-		ArrayList<DateInterval> intervals = openIntervals.get(room);
+		DateIntervalArray intervals = openIntervals.get(room);
 
 		for (String r : ShowRoom.roomAsList(room)) {
-			openIntervals.put(r, new ArrayList<DateInterval>());
-			for (DateInterval di : intervals) {
-				openIntervals.get(r).add(new DateInterval(di.getStart(), di.getEnd()));
-			}
+			openIntervals.put(r, new DateIntervalArray(intervals.getIntervals()));
 		}
 
 		openIntervals.remove(room);
@@ -90,7 +73,7 @@ public class Exhibition2 {
 		return name;
 	}
 
-	public Map<String, ArrayList<DateInterval>> getOpenIntervals() {
+	public Map<String, DateIntervalArray> getOpenIntervals() {
 		return openIntervals;
 	}
 
@@ -99,9 +82,8 @@ public class Exhibition2 {
 	}
 
 	public DateInterval getDisplayDate() {
-		ArrayList<DateInterval> intervals = openIntervals.values().iterator().next();
-		Collections.sort(intervals);
-		return new DateInterval(intervals.get(0).getStart(), intervals.get(intervals.size() - 1).getEnd());
+		DateIntervalArray intervals = openIntervals.values().iterator().next();
+		return intervals.getOverallInterval();
 	}
 
 	@Override
