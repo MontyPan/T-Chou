@@ -1,6 +1,6 @@
 package us.dontcareabout.googleSheet2;
 
-import us.dontcareabout.googleSheet2.Exceptions.ExihibitionNotFoundException;
+import us.dontcareabout.googleSheet2.Exceptions.RoomNotFoundException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -42,7 +42,7 @@ public class Exhibition2 {
 
 			if (openIntervals.get(r) == null && r.length() == 4) {
 				for (String r2 : ShowRoom.roomAsList(r)) {
-					if (!openIntervals.keySet().contains(r2)) throw new ExihibitionNotFoundException(r + " not found.");
+					if (!openIntervals.keySet().contains(r2)) throw new RoomNotFoundException(r);
 					closeRoom.add(r2);
 				}
 				continue;
@@ -58,7 +58,7 @@ public class Exhibition2 {
 	}
 
 	private void splitRoom(String room) {
-		if (openIntervals.get(room) == null) throw new ExihibitionNotFoundException(room + " not found.");
+		if (openIntervals.get(room) == null) throw new RoomNotFoundException(room);
 
 		DateIntervalArray intervals = openIntervals.get(room);
 

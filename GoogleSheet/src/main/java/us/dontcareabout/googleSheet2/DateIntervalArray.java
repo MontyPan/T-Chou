@@ -44,7 +44,7 @@ public class DateIntervalArray {
 			}
 		}
 
-		if (newInterval == null) throw new DateIntervalException(d + " is not between intervals");
+		if (newInterval == null) throw new DateIntervalException(d);
 		addInterval(newInterval);
 	}
 

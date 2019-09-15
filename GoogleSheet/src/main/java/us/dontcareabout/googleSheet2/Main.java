@@ -1,6 +1,6 @@
 package us.dontcareabout.googleSheet2;
 
-import us.dontcareabout.googleSheet2.Exceptions.ExihibitionNotFoundException;
+import us.dontcareabout.googleSheet2.Exceptions.ExhibitionNotFoundException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +38,7 @@ public class Main {
 				}
 			}
 
-			if (!getInfo) throw new ExihibitionNotFoundException(d.name + " not found.");
+			if (!getInfo) throw new ExhibitionNotFoundException(d.name);
 		}
 		return exhibitions;
 	}
