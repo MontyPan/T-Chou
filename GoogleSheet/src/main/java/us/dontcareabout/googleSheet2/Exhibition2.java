@@ -1,5 +1,6 @@
 package us.dontcareabout.googleSheet2;
 
+import us.dontcareabout.googleSheet.RawData;
 import us.dontcareabout.googleSheet2.Exceptions.RoomNotFoundException;
 
 import java.util.ArrayList;
@@ -12,12 +13,12 @@ public class Exhibition2 {
 	private Map<String, OpenIntervals> openIntervals = new HashMap<String, OpenIntervals>();
 
 	public Exhibition2(RawData data) {
-		this.name = data.name;
+		this.name = data.getName();
 
-		for (String room : data.rooms.split(",")) {
+		for (String room : data.getRooms().split(",")) {
 			String r = room.trim().toUpperCase();
 			openIntervals.put(r, new OpenIntervals());
-			openIntervals.get(r).addOpenInterval(data.start, data.end);
+			openIntervals.get(r).addOpenInterval(data.getStart(), data.getEnd());
 		}
 	}
 
@@ -27,12 +28,12 @@ public class Exhibition2 {
 	 * @return 是否成功加入關閉展廳資訊
 	 */
 	public boolean addCloseInfo(RawData data) {
-		if (!this.name.equals(data.name)) return false;
-		DateInterval closeInterval = new DateInterval(data.start, data.end);
+		if (!this.name.equals(data.getName())) return false;
+		DateInterval closeInterval = new DateInterval(data.getStart(), data.getEnd());
 		ArrayList<String> closeRoom = new ArrayList<String>();
 
 		// 讀取關閉展廳
-		for (String room : data.rooms.split(",")) {
+		for (String room : data.getRooms().split(",")) {
 			String r = room.trim().toUpperCase();
 			if (openIntervals.get(r) == null && r.length() == 5) {
 				splitRoom(r.substring(0, r.length() - 1));

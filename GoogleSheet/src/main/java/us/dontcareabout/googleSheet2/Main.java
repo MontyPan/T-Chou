@@ -1,5 +1,6 @@
 package us.dontcareabout.googleSheet2;
 
+import us.dontcareabout.googleSheet.RawData;
 import us.dontcareabout.googleSheet2.Exceptions.ExhibitionNotFoundException;
 
 import java.util.ArrayList;
@@ -23,22 +24,22 @@ public class Main {
 		List<Exhibition2> exhibitions = new ArrayList<Exhibition2>();
 
 		for (RawData d : dataTable) {
-			if (!d.close) {
+			if (!d.isClose()) {
 				exhibitions.add(new Exhibition2(d));
 			}
 		}
 
 		for (RawData d : dataTable) {
-			if (!d.close) continue;
+			if (!d.isClose()) continue;
 
 			boolean getInfo = false;
 			for (Exhibition2 e : exhibitions) {
-				if (d.name.equals(e.getName())) {
+				if (d.getName().equals(e.getName())) {
 					getInfo = e.addCloseInfo(d);
 				}
 			}
 
-			if (!getInfo) throw new ExhibitionNotFoundException(d.name);
+			if (!getInfo) throw new ExhibitionNotFoundException(d.getName());
 		}
 		return exhibitions;
 	}

@@ -3,6 +3,7 @@ package us.dontcareabout.googleSheet2;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import us.dontcareabout.googleSheet.GoogleSheet;
+import us.dontcareabout.googleSheet.RawData;
 
 import java.util.ArrayList;
 
