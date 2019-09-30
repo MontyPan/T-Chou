@@ -9,15 +9,15 @@ import java.util.Set;
 
 public class Exhibition2 {
 	private String name;
-	private Map<String, DateIntervalArray> openIntervals = new HashMap<String, DateIntervalArray>();
+	private Map<String, OpenIntervals> openIntervals = new HashMap<String, OpenIntervals>();
 
 	public Exhibition2(RawData data) {
 		this.name = data.name;
 
 		for (String room : data.rooms.split(",")) {
 			String r = room.trim().toUpperCase();
-			openIntervals.put(r, new DateIntervalArray());
-			openIntervals.get(r).addInterval(data.start, data.end);
+			openIntervals.put(r, new OpenIntervals());
+			openIntervals.get(r).addOpenInterval(data.start, data.end);
 		}
 	}
 
@@ -52,7 +52,7 @@ public class Exhibition2 {
 
 		// 加入關閉展廳資料
 		for (String r : closeRoom) {
-			openIntervals.get(r).cutInterval(closeInterval);
+			openIntervals.get(r).removeCloseInterval(closeInterval);
 		}
 		return true;
 	}
@@ -60,10 +60,10 @@ public class Exhibition2 {
 	private void splitRoom(String room) {
 		if (openIntervals.get(room) == null) throw new RoomNotFoundException(room);
 
-		DateIntervalArray intervals = openIntervals.get(room);
+		OpenIntervals intervals = openIntervals.get(room);
 
 		for (String r : ShowRoom.roomAsList(room)) {
-			openIntervals.put(r, new DateIntervalArray(intervals.getIntervals()));
+			openIntervals.put(r, new OpenIntervals(intervals.getOpenIntervals()));
 		}
 
 		openIntervals.remove(room);
@@ -73,7 +73,7 @@ public class Exhibition2 {
 		return name;
 	}
 
-	public Map<String, DateIntervalArray> getOpenIntervals() {
+	public Map<String, OpenIntervals> getOpenIntervals() {
 		return openIntervals;
 	}
 
@@ -82,8 +82,8 @@ public class Exhibition2 {
 	}
 
 	public DateInterval getDisplayDate() {
-		DateIntervalArray intervals = openIntervals.values().iterator().next();
-		return intervals.getOverallInterval();
+		OpenIntervals intervals = openIntervals.values().iterator().next();
+		return intervals.getOpenRange();
 	}
 
 	@Override

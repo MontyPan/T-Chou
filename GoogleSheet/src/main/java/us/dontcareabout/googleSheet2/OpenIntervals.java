@@ -9,32 +9,38 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
-public class DateIntervalArray {
+public class OpenIntervals {
 	private ArrayList<DateInterval> intervals;
 
-	public DateIntervalArray() {
+	public OpenIntervals() {
 		this.intervals = new ArrayList<DateInterval>();
 	}
 
-	public DateIntervalArray(List<DateInterval> intervals) {
+	public OpenIntervals(List<DateInterval> intervals) {
 		this.intervals = new ArrayList<DateInterval>();
 		for (DateInterval d : intervals) {
-			this.addInterval(d);
+			this.addOpenInterval(d);
 		}
 	}
 
-	public void addInterval(Date start, Date end) {
+	/**
+	 * 加入開放期間
+	 */
+	public void addOpenInterval(Date start, Date end) {
 		intervals.add(new DateInterval(start, end));
 	}
 
-	public void addInterval(DateInterval d) {
-		intervals.add(new DateInterval(d.getStart(), d.getEnd()));
+	/**
+	 * 加入開放期間
+	 */
+	public void addOpenInterval(DateInterval d) {
+		this.addOpenInterval(d.getStart(), d.getEnd());
 	}
 
 	/**
-	 * 移除 intervals 內的一段日期
+	 * 移除換展關閉期間
 	 */
-	public void cutInterval(DateInterval d) {
+	public void removeCloseInterval(DateInterval d) {
 		DateInterval newInterval = null;
 		for (DateInterval d2 : intervals) {
 			if (d2.containInterval(d)) {
@@ -45,16 +51,16 @@ public class DateIntervalArray {
 		}
 
 		if (newInterval == null) throw new DateIntervalException(d);
-		addInterval(newInterval);
+		addOpenInterval(newInterval);
 	}
 
 	/**
-	 * @return intervals 的整段範圍
+	 * @return 開放期間的範圍
 	 */
-	public DateInterval getOverallInterval() {
+	public DateInterval getOpenRange() {
 		intervals.sort(new Comparator<DateInterval>() {
 			/**
-			 * 比較兩個 DateInterval 的 start。
+			 * 比較兩個 {@link DateInterval} 的開始日期。
 			 */
 			@Override
 			public int compare(DateInterval d1, DateInterval d2) {
@@ -64,7 +70,10 @@ public class DateIntervalArray {
 		return new DateInterval(intervals.get(0).getStart(), intervals.get(intervals.size() - 1).getEnd());
 	}
 
-	public List<DateInterval> getIntervals() {
+	/**
+	 * @return 所有開放期間
+	 */
+	public List<DateInterval> getOpenIntervals() {
 		return Collections.unmodifiableList(intervals);
 	}
 
