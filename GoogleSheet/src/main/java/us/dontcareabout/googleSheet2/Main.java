@@ -1,5 +1,6 @@
 package us.dontcareabout.googleSheet2;
 
+import us.dontcareabout.googleSheet.Mapper;
 import us.dontcareabout.googleSheet.RawData;
 import us.dontcareabout.googleSheet2.Exceptions.ExhibitionNotFoundException;
 
