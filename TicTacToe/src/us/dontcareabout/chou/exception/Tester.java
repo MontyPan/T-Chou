@@ -2,10 +2,24 @@ package us.dontcareabout.chou.exception;
 
 public class Tester {
 	public static void main(String[] args) {
+		example();
+	}
+
+	private static void example() {
 		for (int i = 0; i < 10; i++) {
 			System.out.println("!!!!" + i + "!!!!");
-			level1();
+			try {
+				func1(i);
+			} catch (HandleMeException e) {
+				System.out.println(e);
+			}
 		}
+	}
+
+	private static void func1(int i) {
+		if (i % 2 == 0) exception();
+
+		level1();
 	}
 
 	private static void level1() {
@@ -28,7 +42,7 @@ public class Tester {
 
 	private static void level4() {
 		System.out.println("\t\t\tlevel-4 =>");
-		exception();
+
 		System.out.println("\t\t\t<= level-4");
 	}
 
