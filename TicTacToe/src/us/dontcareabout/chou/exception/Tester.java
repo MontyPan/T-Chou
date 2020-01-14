@@ -2,17 +2,17 @@ package us.dontcareabout.chou.exception;
 
 public class Tester {
 	public static void main(String[] args) {
-		example();
+		try {
+			example();
+		} catch (HandleMeException e) {
+			System.out.println(e);
+		}
 	}
 
 	private static void example() {
 		for (int i = 0; i < 10; i++) {
 			System.out.println("!!!!" + i + "!!!!");
-			try {
-				func1(i);
-			} catch (HandleMeException e) {
-				System.out.println(e);
-			}
+			func1(i);
 		}
 	}
 
