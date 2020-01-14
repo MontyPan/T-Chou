@@ -2,7 +2,10 @@ package us.dontcareabout.chou.exception;
 
 public class Tester {
 	public static void main(String[] args) {
-		level1();
+		for (int i = 0; i < 10; i++) {
+			System.out.println("!!!!" + i + "!!!!");
+			level1();
+		}
 	}
 
 	private static void level1() {
@@ -35,4 +38,5 @@ public class Tester {
 }
 
 @SuppressWarnings("serial")
-class HandleMeException extends RuntimeException {}
+class HandleMeException extends RuntimeException {
+}
