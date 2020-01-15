@@ -2,6 +2,23 @@ package us.dontcareabout.chou.exception;
 
 public class Tester {
 	public static void main(String[] args) {
+		try {
+			example();
+		} catch (HandleMeException e) {
+			System.out.println(e);
+		}
+	}
+
+	private static void example() {
+		for (int i = 0; i < 10; i++) {
+			System.out.println("!!!!" + i + "!!!!");
+			func1(i);
+		}
+	}
+
+	private static void func1(int i) {
+		if (i % 2 == 0) exception();
+
 		level1();
 	}
 
@@ -25,7 +42,7 @@ public class Tester {
 
 	private static void level4() {
 		System.out.println("\t\t\tlevel-4 =>");
-		exception();
+
 		System.out.println("\t\t\t<= level-4");
 	}
 
@@ -35,4 +52,5 @@ public class Tester {
 }
 
 @SuppressWarnings("serial")
-class HandleMeException extends RuntimeException {}
+class HandleMeException extends RuntimeException {
+}
